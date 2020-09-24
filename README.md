@@ -1,1 +1,1 @@
-# Sonar-Hydrophone-Array-Modeller
+# Sonar Hydrophone Array Modeller
