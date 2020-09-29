@@ -1,4 +1,5 @@
 __pycache__
+<<<<<<< HEAD
 *.py~
 *.wxg~
 <<<<<<< HEAD
@@ -11,3 +12,7 @@ __pycache__
 GUI_Files/MainWindow.py
 GUI_Files/PanelDialog.py
 >>>>>>> Initial GUI dialog scaling and failed array saving trials.
+||||||| constructed merge base
+=======
+.wxg~
+>>>>>>> Initial GUI Draft
