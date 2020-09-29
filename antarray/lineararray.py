@@ -74,6 +74,8 @@ class LinearArray(AntennaArray):
 
         self.size = size
         self.spacing = spacing
+        self.linear = True
+        self.failures = np.ones(size)
         self.window_dict = {
             'Square': self.square_win,
             'Chebyshev': self.chebyshev_win,
@@ -96,9 +98,9 @@ class LinearArray(AntennaArray):
             Spacing between antenna elements
         """
 
-        keys = ['size', 'spacing']
+        keys = ['size', 'spacing', 'failures']
         self.__dict__.update((k, v) for k, v in kwargs.items() if k in keys)
-        self.__init__(self.size, self.spacing)
+        self.__init__(self.size, self.spacing, self.failures)
 
     def get_pattern(self, theta, beam_loc=0, window='Square', sll=-60, nbar=4):
         """
@@ -135,6 +137,7 @@ class LinearArray(AntennaArray):
             beam_loc / 180 * np.pi)) * self.window_dict[window](
                 self.size, sll, nbar)
 
+        weight *= self.failures
         weight = weight / np.sum(np.abs(weight))
 
         theta_grid, array_geometry_grid = np.meshgrid(

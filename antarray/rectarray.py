@@ -86,6 +86,7 @@ class RectArray(AntennaArray):
         self.sizey = sizey
         self.spacingx = spacingx
         self.spacingy = spacingy
+        self.failures = np.ones((sizex, sizey))
         self.window_dict = {
             'Square': self.square_win,
             'Chebyshev': self.chebyshev_win,
@@ -95,7 +96,7 @@ class RectArray(AntennaArray):
         }
         self.x_array = np.arange(0, self.sizex, 1)*self.spacingx
         self.y_array = np.arange(0, self.sizey, 1)*self.spacingy
-
+        self.linear = False
         AntennaArray.__init__(self, x=np.tile(
             self.x_array, self.sizey), y=np.repeat(self.y_array, self.sizex))
 
@@ -117,9 +118,9 @@ class RectArray(AntennaArray):
             (Normalized to wavelength)
         """
 
-        keys = ['sizex', 'sizey', 'spacingx', 'spacingy']
+        keys = ['sizex', 'sizey', 'spacingx', 'spacingy', 'failures']
         self.__dict__.update((k, v) for k, v in kwargs.items() if k in keys)
-        self.__init__(self.sizex, self.sizey, self.spacingx, self.spacingy)
+        self.__init__(self.sizex, self.sizey, self.spacingx, self.spacingy, self.failures)
 
     def get_pattern(self,
                     nfft_az=512,
@@ -207,6 +208,7 @@ class RectArray(AntennaArray):
             beam_az / 180 * np.pi) + y_grid * np.sin(
             beam_el/180*np.pi)))*window
 
+        weight *= self.failures
         weight = weight / np.sum(np.abs(weight))
 
         tilex = int(np.ceil(self.spacingx-0.5))*2+1
@@ -276,7 +278,7 @@ class RectArray(AntennaArray):
             'array_factor': AF,
             'x': self.x,
             'y': self.y,
-            'weight': weight.ravel(order='F'),
+            'weight': weight,
             'azimuth': azimuth,
             'elevation': elevation}
 
