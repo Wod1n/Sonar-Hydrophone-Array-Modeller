@@ -1,2 +1,13 @@
 __pycache__
+*.py~
 *.wxg~
+<<<<<<< HEAD
+=======
+>>>>>>> Add __pycache__ to gitignore
+||||||| constructed merge base
+=======
+*.wxg#
+
+GUI_Files/MainWindow.py
+GUI_Files/PanelDialog.py
+>>>>>>> Initial GUI dialog scaling and failed array saving trials.
