@@ -1,9 +1,12 @@
-import MainWindow as mw
-import PanelDialogController as pdc
-import wx
+import GUI as mw
 import numpy as np
+import matplotlib.pyplot as pyplt
+from mpl_toolkits import mplot3d
+from matplotlib import cm
+import antarray
+import wx
 
-class MainFrameController(mw.MainFrame):
+class MainFrameController(mw.mainFrame):
 
     def __init__(self, *args, **kwds):
 
@@ -22,6 +25,34 @@ class MainFrameController(mw.MainFrame):
 
     def panelButtonPressed(self, event):
         app.panelDialog()
+
+    def showGraph(self, event):
+        array = antarray.RectArray(self.xnumber, self.ynumber, self.xspacing/2, self.yspacing/2)
+        #theta = np.arange(-180, 180, 0.1)
+
+        x = np.linspace(0, 10, 1025)
+        y = np.linspace(0, 10, 1025)
+
+        xgrid, ygrid = np.meshgrid(x,y)
+
+        fig = pyplt.figure()
+        ax = pyplt.axes(projection='3d')
+
+        #toggle back in when failed array is merged in
+        #array.toggle_panels(self.failedPanels)
+
+        ax.contour3D(xgrid, ygrid, np.abs(array.get_pattern()["array_factor"]), 50, rstride=1, cstride=1,
+            cmap=cm.coolwarm, linewidth=0, antialiased=False)
+
+        print(array.get_pattern()["weight"])
+
+        ax.set_xlabel('x')
+        ax.set_ylabel('y')
+        ax.set_zlabel('z');
+
+        ax.view_init(60, 35)
+        pyplt.show()
+        print("graph")
 
     def xnumberSliderChanged(self, event):
         self.xnumber = self.xnumberSlider.GetValue()
@@ -65,6 +96,9 @@ class MainFrameController(mw.MainFrame):
 
     def updateFailedArray(self):
         self.failedPanels = np.ones((self.xnumber, self.ynumber), dtype=int)
+
+    def getDimensions(self):
+        return (self.xnumber, self.ynumber)
 
 class panelDialogController(mw.panelDialog):
 
@@ -116,6 +150,8 @@ class panelDialogController(mw.panelDialog):
 
             counterx = 0
             countery += 1
+
+        self.Fit()
 
 
 class windowApp(wx.App):

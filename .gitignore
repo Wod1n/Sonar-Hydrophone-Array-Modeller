@@ -1,5 +1,4 @@
 __pycache__
-<<<<<<< HEAD
 *.py~
 *.wxg~
 <<<<<<< HEAD
@@ -9,6 +8,7 @@ __pycache__
 =======
 *.wxg#
 
+<<<<<<< HEAD
 GUI_Files/MainWindow.py
 GUI_Files/PanelDialog.py
 >>>>>>> Initial GUI dialog scaling and failed array saving trials.
@@ -16,3 +16,13 @@ GUI_Files/PanelDialog.py
 =======
 .wxg~
 >>>>>>> Initial GUI Draft
+||||||| constructed merge base
+GUI_Files/MainWindow.py
+GUI_Files/PanelDialog.py
+=======
+.wxg~
+>>>>>>> bd9a5caf94f3487f2148b0dcaa815d8c1ab24bd0
+=======
+GUI/MainWindow.py
+GUI/PanelDialog.py
+>>>>>>> Add show graph capability and restructure file layout
