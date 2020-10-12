@@ -14,6 +14,8 @@ class MainFrameController(mw.mainFrame):
         self.xspacing = 1
         self.ynumber = 1
         self.yspacing = 1
+        self.azi = 0
+        self.ele = 0
 
         self.updateFailedArray()
 
@@ -30,8 +32,14 @@ class MainFrameController(mw.mainFrame):
         array = antarray.RectArray(self.xnumber, self.ynumber, self.xspacing/2, self.yspacing/2)
         #theta = np.arange(-180, 180, 0.1)
 
-        x = np.linspace(0, 10, 1025)
         y = np.linspace(0, 10, 1025)
+        AF = array.get_pattern(beam_az = self.azi, beam_el = self.ele)["array_factor"]
+
+        tilex = int(np.ceil(self.xspacing-0.5))*2+1
+        tiley = int(np.ceil(self.yspacing-0.5))*2+1
+
+        x = np.linspace(-tilex, tilex, AF.shape[1])
+        y = np.linspace(-tiley, tiley, AF.shape[0])
 
         xgrid, ygrid = np.meshgrid(x,y)
 
@@ -70,8 +78,8 @@ class MainFrameController(mw.mainFrame):
         self.updateFailedArray()
 
     def xspacingSpinBoxChanged(self, event):
-        self.xspacing = self.yspacingSpinBox.GetValue()
-        self.yspacingSlider.SetValue(self.xspacing)
+        self.xspacing = self.xspacingSpinBox.GetValue()
+        self.xspacingSlider.SetValue(self.xspacing)
         self.updateFailedArray()
 
     def ynumberSliderChanged(self, event):
@@ -93,6 +101,22 @@ class MainFrameController(mw.mainFrame):
         self.yspacing = self.yspacingSpinBox.GetValue()
         self.yspacingSlider.SetValue(self.yspacing)
         self.updateFailedArray()
+
+    def aziSliderChanged(self, event):
+        self.azi = self.aziSlider.GetValue()
+        self.aziSpinBox.SetValue(self.azi)
+
+    def aziSpinBoxChanged(self, event):
+        self.azi = self.aziSpinBox.GetValue()
+        self.aziSlider.SetValue(self.azi)
+
+    def eleSliderChanged(self, event):
+        self.ele = self.eleSlider.GetValue()
+        self.eleSpinBox.SetValue(self.ele)
+
+    def eleSpinBoxChanged(self, event):
+        self.ele = self.eleSpinBox.GetValue()
+        self.eleSlider.SetValue(self.ele)
 
     def updateFailedArray(self):
         self.failedPanels = np.ones((self.xnumber, self.ynumber), dtype=int)
