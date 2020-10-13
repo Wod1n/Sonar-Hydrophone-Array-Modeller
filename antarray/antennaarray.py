@@ -116,9 +116,9 @@ class AntennaArray:
     def toggle_panels(self, coordinate_list):
 
         # Bug testing code, will be removed in final
-        if not coordinate_list:
-            return
-
+        #if not coordinate_list:
+        #    return
+        '''
         if self.linear:
 
             if type(coordinate_list) == int:
@@ -138,3 +138,6 @@ class AntennaArray:
             for coord in coordinate_list:
                 self.failures[coord[0]][coord[1]] = 0
             return
+        '''
+
+        self.failures = coordinate_list

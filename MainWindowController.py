@@ -1,6 +1,7 @@
 import GUI as mw
 import numpy as np
 import matplotlib.pyplot as pyplt
+import matplotlib.transforms as mtransforms
 from mpl_toolkits import mplot3d
 from matplotlib import cm
 import antarray
@@ -16,6 +17,7 @@ class MainFrameController(mw.mainFrame):
         self.yspacing = 1
         self.azi = 0
         self.ele = 0
+        self.graphMode = "3D Surface"
 
         self.updateFailedArray()
 
@@ -28,11 +30,30 @@ class MainFrameController(mw.mainFrame):
     def panelButtonPressed(self, event):
         app.panelDialog()
 
+    def surface3d(self, AF, xgrid, ygrid):
+        fig = pyplt.figure()
+        ax = pyplt.axes(projection='3d')
+
+        ax.plot_surface(xgrid, ygrid, 20*np.log10(np.abs(AF)),cmap='viridis', edgecolor='none')
+        ax.set_title('Surface plot')
+
+        ax.set_xlabel('y')
+        ax.set_ylabel('x')
+        ax.set_zlabel('Intensity')
+
+        ax.view_init(60, 35)
+        pyplt.show()
+
+    def polar2d(self, AF, xgrid, ygrid):
+        print(xgrid)
+        print(ygrid)
+
     def showGraph(self, event):
-        array = antarray.RectArray(self.xnumber, self.ynumber, self.xspacing/2, self.yspacing/2)
+        array = antarray.RectArray(self.xnumber, self.ynumber, self.xspacing/2, self.yspacing/2,)
         #theta = np.arange(-180, 180, 0.1)
 
-        y = np.linspace(0, 10, 1025)
+        array.toggle_panels(app.window.failedPanels)
+
         AF = array.get_pattern(beam_az = self.azi, beam_el = self.ele)["array_factor"]
 
         tilex = int(np.ceil(self.xspacing-0.5))*2+1
@@ -43,24 +64,12 @@ class MainFrameController(mw.mainFrame):
 
         xgrid, ygrid = np.meshgrid(x,y)
 
-        fig = pyplt.figure()
-        ax = pyplt.axes(projection='3d')
+        graph_type = {
+        "3D Surface" : self.surface3d,
+        "2D Polar" : self.polar2d,
+        }
 
-        #toggle back in when failed array is merged in
-        #array.toggle_panels(self.failedPanels)
-
-        ax.contour3D(xgrid, ygrid, np.abs(array.get_pattern()["array_factor"]), 50, rstride=1, cstride=1,
-            cmap=cm.coolwarm, linewidth=0, antialiased=False)
-
-        print(array.get_pattern()["weight"])
-
-        ax.set_xlabel('x')
-        ax.set_ylabel('y')
-        ax.set_zlabel('z');
-
-        ax.view_init(60, 35)
-        pyplt.show()
-        print("graph")
+        graph_type[self.graphMode](AF, xgrid, ygrid)
 
     def xnumberSliderChanged(self, event):
         self.xnumber = self.xnumberSlider.GetValue()
@@ -117,6 +126,13 @@ class MainFrameController(mw.mainFrame):
     def eleSpinBoxChanged(self, event):
         self.ele = self.eleSpinBox.GetValue()
         self.eleSlider.SetValue(self.ele)
+
+    def graphComboSelect(self, event):
+        self.graphMode = self.graphCombo.GetValue()
+
+    def presetSave(self, event):
+        print("Saving Config")
+        app.presetDialog()
 
     def updateFailedArray(self):
         self.failedPanels = np.ones((self.xnumber, self.ynumber), dtype=int)
