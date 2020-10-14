@@ -72,7 +72,11 @@ class MainFrameController(mw.mainFrame):
 
         middle = math.ceil(AF.shape[1]/2)
 
-        pyplt.polar(azimuth/180 * np.pi, 20*np.log10(np.abs(AF[:, middle]) + 0.000001),color='green', linewidth=2)
+        fig = pyplt.figure()
+        ax = pyplt.axes(polar=True)
+
+        ax.plot(azimuth/180 * np.pi, 20*np.log10(np.abs(AF[:, middle]) + 0.000001),color='green', linewidth=2)
+        ax.set_rmin(-70)
 
         pyplt.show()
 
