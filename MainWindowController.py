@@ -8,6 +8,7 @@ import json
 import glob, os
 from zipfile import ZipFile
 import antarray
+import math
 import wx
 
 class MainFrameController(mw.mainFrame):
@@ -48,11 +49,13 @@ class MainFrameController(mw.mainFrame):
     def panelButtonPressed(self, event):
         app.panelDialog()
 
-    def surface3d(self, AF, xgrid, ygrid):
+    def surface3d(self, pattern, xgrid, ygrid):
         fig = pyplt.figure()
         ax = pyplt.axes(projection='3d')
 
-        ax.plot_surface(xgrid, ygrid, 20*np.log10(np.abs(AF)),cmap='viridis', edgecolor='none')
+        AF = pattern['array_factor']
+
+        ax.plot_surface(xgrid, ygrid, 20*np.log10(np.abs(AF) + 0.0001),cmap=cm.coolwarm, linewidth=0)
         ax.set_title('Surface plot')
 
         ax.set_xlabel('y')
@@ -62,23 +65,28 @@ class MainFrameController(mw.mainFrame):
         ax.view_init(60, 35)
         pyplt.show()
 
-    def polar2d(self, AF, xgrid, ygrid):
-        print(xgrid)
-        print(ygrid)
+    def polar2d(self, pattern, xgrid, ygrid):
+
+        azimuth = pattern['azimuth']
+        AF = pattern['array_factor']
+
+        middle = math.ceil(AF.shape[1]/2)
+
+        pyplt.polar(azimuth/180 * np.pi, 20*np.log10(np.abs(AF[:, middle]) + 0.000001),color='green', linewidth=2)
+
+        pyplt.show()
+
 
     def showGraph(self, event):
-        array = antarray.RectArray(self.xnumber, self.ynumber, self.xspacing/2, self.yspacing/2,)
+        array = antarray.RectArray(self.xnumber, self.ynumber, self.xspacing/2, self.yspacing/2)
         #theta = np.arange(-180, 180, 0.1)
 
         array.toggle_panels(self.failedPanels)
 
-        AF = array.get_pattern(beam_az = self.azi, beam_el = self.ele)["array_factor"]
+        pattern = array.get_pattern(beam_az = self.azi, beam_el = self.ele, windowx=self.xshading, windowy=self.yshading)
 
-        tilex = int(np.ceil(self.xspacing-0.5))*2+1
-        tiley = int(np.ceil(self.yspacing-0.5))*2+1
-
-        x = np.linspace(-tilex, tilex, AF.shape[1])
-        y = np.linspace(-tiley, tiley, AF.shape[0])
+        x = np.linspace(-90, 90, pattern['array_factor'].shape[1])
+        y = np.linspace(-90, 90, pattern['array_factor'].shape[0])
 
         xgrid, ygrid = np.meshgrid(x,y)
 
@@ -87,7 +95,7 @@ class MainFrameController(mw.mainFrame):
         "2D Polar" : self.polar2d,
         }
 
-        graph_type[self.graphMode](AF, xgrid, ygrid)
+        graph_type[self.graphMode](pattern, xgrid, ygrid)
 
     def getState(self):
         current_state = {   "xnumber" : self.xnumber,
@@ -157,6 +165,12 @@ class MainFrameController(mw.mainFrame):
     def eleSpinBoxChanged(self, event):
         self.ele = self.eleSpinBox.GetValue()
         self.eleSlider.SetValue(self.ele)
+
+    def xwindowChanged(self, event):
+        self.xshading =  self.xwindowSelector.GetValue()
+
+    def ywindowChanged(self, event):
+        self.yshading =  self.ywindowSelector.GetValue()
 
     def graphComboSelect(self, event):
         self.graphMode = self.graphCombo.GetValue()

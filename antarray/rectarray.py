@@ -260,7 +260,6 @@ class RectArray(AntennaArray):
             elevation = np.arcsin(k_el)/np.pi*180
 
         elif nfft_el > 1 and nfft_az > 1:
-            print(np.fft.fft2(xy*weight, (nfft_az, nfft_el)))
             AF = np.fft.fftshift(np.fft.fft2(xy*weight, (nfft_az, nfft_el)))
             AF = np.tile(AF, (tilex, 1))
             AF = np.tile(AF, (1, tiley))
