@@ -112,3 +112,32 @@ class AntennaArray:
                        (self.x[idx]*u_grid + self.y[idx]*v_grid)) * weight[idx]
 
         return {'array_factor': np.transpose(AF)}
+
+    def toggle_panels(self, coordinate_list):
+
+        # Bug testing code, will be removed in final
+        #if not coordinate_list:
+        #    return
+        '''
+        if self.linear:
+
+            if type(coordinate_list) == int:
+                self.failures[coordinate_list] *= 0
+                return
+
+            else:
+                for coord in coordinate_list:
+                    self.failures[coord] *= 0
+                return
+
+        if len(coordinate_list) == 2:
+            self.failures[coordinate_list[0]][coordinate_list[1]] *= 0
+            return
+
+        else:
+            for coord in coordinate_list:
+                self.failures[coord[0]][coord[1]] = 0
+            return
+        '''
+
+        self.failures = coordinate_list
