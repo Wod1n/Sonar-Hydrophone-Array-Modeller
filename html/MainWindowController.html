@@ -1,0 +1,2192 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.9.1" />
+<title>MainWindowController API documentation</title>
+<meta name="description" content="This file contains the class for the Main Window Controller
+Overloading the empty methods for the GUI elements" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>MainWindowController</code></h1>
+</header>
+<section id="section-intro">
+<p>This file contains the class for the Main Window Controller
+Overloading the empty methods for the GUI elements</p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">&#34;&#34;&#34;
+    This file contains the class for the Main Window Controller
+    Overloading the empty methods for the GUI elements
+&#34;&#34;&#34;
+
+
+import GUI as mw
+import numpy as np
+import matplotlib.pyplot as pyplt
+import matplotlib.transforms as mtransforms
+from mpl_toolkits import mplot3d
+from matplotlib import cm
+import json
+import glob, os
+from zipfile import ZipFile
+import antarray
+import math
+import wx
+
+class MainFrameController(mw.mainFrame):
+    &#34;&#34;&#34;
+    A class which controls the main window GUI element
+    and the array shape
+
+    Overloads the mainFrame class generated by wxGlade
+
+    ...
+
+    Attributes
+    ----------
+
+    arraytype : string
+        Type of array to use
+        (Currently Linear or Rect)
+    xnumber : int
+        Number of elements in the x axis
+    xspacing : float
+        Spacing of the elements along the x axis
+        (Normalized to wavelength)
+    xshading : string
+        Type of shading employed in the x direction
+        (Square [default], Chebyshev, Taylor, Hamming, Hanning)
+    ynumber : int
+        Number of elements in the y axis
+    yspacing : float
+        Spacing of the elements along the y axis
+        (Normalized to wavelength)
+    yshading : string
+        Type of shading employed in the y direction
+        (Square [default], Chebyshev, Taylor, Hamming, Hanning)
+    azi : int
+        Steering of the beam in the azimuthal direction
+        (Range +/- 180 degrees)
+    ele : int
+        Steering of the beam in elevation
+        (Range +/- 90 degrees)
+    graphMode : string
+        Type of graph to be displayed
+        (currently 3D intensity or 2D polar)
+    &#34;&#34;&#34;
+
+
+    def __init__(self, *args, **kwds):
+        &#34;&#34;&#34;
+        Parameters
+        ----------
+        arraytype : string
+            Type of array to use
+            (Currently Linear or Rect)
+            Default Rect
+        xnumber : int
+            Number of elements in the x axis
+            Default 1
+        xspacing : float
+            Spacing of the elements along the x axis
+            (Normalized to wavelength)
+            Default 1
+        xshading : string
+            Type of shading employed in the x direction
+            (Square [default], Chebyshev, Taylor, Hamming, Hanning)
+        ynumber : int
+            Number of elements in the y axis
+            Default 1
+        yspacing : float
+            Spacing of the elements along the y axis
+            (Normalized to wavelength)
+            Default 1
+        yshading : string
+            Type of shading employed in the y direction
+            (Square [default], Chebyshev, Taylor, Hamming, Hanning)
+        azi : int
+            Steering of the beam in the azimuthal direction
+            (Range +/- 180 degrees)
+            Default 0
+        ele : int
+            Steering of the beam in elevation
+            (Range +/- 90 degrees)
+            Default 0
+        graphMode : string
+            Type of graph to be displayed
+            (currently 3D intensity or 2D polar)
+            Default 3D Surface
+        &#34;&#34;&#34;
+
+
+        self.arraytype = &#34;rect&#34;
+        self.xnumber = 1
+        self.xspacing = 1
+        self.ynumber = 1
+        self.yspacing = 1
+        self.azi = 0
+        self.ele = 0
+        self.graphMode = &#34;3D Surface&#34;
+        self.xshading = &#34;Square&#34;
+        self.yshading = &#34;Square&#34;
+
+        self.updateFailedArray()
+
+        os.chdir(&#34;Presets/&#34;)
+
+        super().__init__(*args, **kwds)
+        wxglade_tmp_menu = wx.Menu()
+        number = 0
+        self.preset = {}
+        for file in glob.glob(&#34;*.sham&#34;):
+            wxglade_tmp_menu.Append(number, file[:-5])
+            self.preset[number] = file
+            self.Bind(wx.EVT_MENU, self.presetLoad, id=number)
+            number += 1
+
+        self.frame_menubar.Insert(3, wxglade_tmp_menu, &#34;Presets&#34;)
+
+
+    def quitPressed(self, event):
+        &#34;&#34;&#34;
+        Exits the program
+        &#34;&#34;&#34;
+        print(&#34;quitting&#34;)
+        exit()
+
+    def panelButtonPressed(self, event):
+        &#34;&#34;&#34;
+        Opens failed panels Dialog
+        &#34;&#34;&#34;
+        app.panelDialog()
+
+    def surface3d(self, pattern, xgrid, ygrid):
+        &#34;&#34;&#34;
+        Shows the 3D surface plot
+
+        Parameters
+        ----------
+        pattern : dictionary
+            Contains the information regarding array factor
+        xgrid : array
+            Array for the points on the x axis
+        ygrid : array
+            Array for the points on the y axis
+        &#34;&#34;&#34;
+        fig = pyplt.figure()
+        ax = pyplt.axes(projection=&#39;3d&#39;)
+
+        AF = pattern[&#39;array_factor&#39;]
+
+        ax.plot_surface(xgrid, ygrid, 20*np.log10(np.abs(AF) + 0.0001),cmap=cm.coolwarm, linewidth=0)
+        ax.set_title(&#39;Surface plot&#39;)
+
+        ax.set_xlabel(&#39;y&#39;)
+        ax.set_ylabel(&#39;x&#39;)
+        ax.set_zlabel(&#39;Intensity&#39;)
+
+        ax.view_init(60, 35)
+        pyplt.show()
+
+    def polar2d(self, pattern, xgrid, ygrid):
+        &#34;&#34;&#34;
+        Shows the 2D Polar plot
+
+        Parameters
+        ----------
+        pattern : dictionary
+            Contains the information regarding array factor
+        xgrid : array
+            Array for the points on the x axis
+        ygrid : array
+            Array for the points on the y axis
+        &#34;&#34;&#34;
+
+        azimuth = pattern[&#39;azimuth&#39;]
+        AF = pattern[&#39;array_factor&#39;]
+
+        middle = math.ceil(AF.shape[1]/2)
+
+        fig = pyplt.figure()
+        ax = pyplt.axes(polar=True)
+
+        ax.plot(azimuth/180 * np.pi, 20*np.log10(np.abs(AF[:, middle]) + 0.000001),color=&#39;green&#39;, linewidth=2)
+        ax.set_rmin(-70)
+
+        pyplt.show()
+
+
+    def showGraph(self, event):
+        &#34;&#34;&#34;
+        Commands the program to display the graph selected
+        &#34;&#34;&#34;
+        array = antarray.RectArray(self.xnumber, self.ynumber, self.xspacing/2, self.yspacing/2)
+        #theta = np.arange(-180, 180, 0.1)
+
+        array.toggle_panels(self.failedPanels)
+
+        pattern = array.get_pattern(beam_az = self.azi, beam_el = self.ele, windowx=self.xshading, windowy=self.yshading)
+
+        x = np.linspace(-90, 90, pattern[&#39;array_factor&#39;].shape[1])
+        y = np.linspace(-90, 90, pattern[&#39;array_factor&#39;].shape[0])
+
+        xgrid, ygrid = np.meshgrid(x,y)
+
+        graph_type = {
+        &#34;3D Surface&#34; : self.surface3d,
+        &#34;2D Polar&#34; : self.polar2d,
+        }
+
+        graph_type[self.graphMode](pattern, xgrid, ygrid)
+
+    def getState(self):
+        &#34;&#34;&#34;
+        Generates a dictionary of values for the current state
+        &#34;&#34;&#34;
+        current_state = {   &#34;xnumber&#34; : self.xnumber,
+                            &#34;xspacing&#34; : self.xspacing,
+                            &#34;ynumber&#34; : self.ynumber,
+                            &#34;yspacing&#34; : self.yspacing,
+                            &#34;azimuth&#34; : self.azi,
+                            &#34;elevation&#34; : self.ele,
+                            &#34;graphmode&#34; : self.graphMode,
+                            &#34;xshading&#34; : self.xshading,
+                            &#34;yshading&#34; : self.yshading}
+
+        return current_state
+
+    def xnumberSliderChanged(self, event):
+        &#34;&#34;&#34;
+        Changes the x number combo box value to match the x number slider value
+        &#34;&#34;&#34;
+        self.xnumber = self.xnumberSlider.GetValue()
+        self.xnumberSpinBox.SetValue(self.xnumber)
+        self.updateFailedArray()
+
+    def xnumberSpinBoxChanged(self, event):
+        &#34;&#34;&#34;
+        Changes the x number slider value to match the x number combo box value
+        &#34;&#34;&#34;
+        self.xnumber = self.xnumberSpinBox.GetValue()
+        self.xnumberSlider.SetValue(self.xnumber)
+        self.updateFailedArray()
+
+    def xspacingSliderChanged(self, event):
+        &#34;&#34;&#34;
+        Changes the x spacing combo box value to match the x spacing slider value
+        &#34;&#34;&#34;
+        self.xspacing = self.xspacingSlider.GetValue()
+        self.xspacingSpinBox.SetValue(self.xspacing)
+        self.updateFailedArray()
+
+    def xspacingSpinBoxChanged(self, event):
+        &#34;&#34;&#34;
+        Changes the x spacing slider value to match the x spacing combo box value
+        &#34;&#34;&#34;
+        self.xspacing = self.xspacingSpinBox.GetValue()
+        self.xspacingSlider.SetValue(self.xspacing)
+        self.updateFailedArray()
+
+    def ynumberSliderChanged(self, event):
+        &#34;&#34;&#34;
+        Changes the y number combo box value to match the y number slider value
+        &#34;&#34;&#34;
+        self.ynumber = self.ynumberSlider.GetValue()
+        self.ynumberSpinBox.SetValue(self.ynumber)
+        self.updateFailedArray()
+
+    def ynumberSpinBoxChanged(self, event):
+        &#34;&#34;&#34;
+        Changes the y number slider value to match the y number combo box value
+        &#34;&#34;&#34;
+        self.ynumber = self.ynumberSpinBox.GetValue()
+        self.ynumberSlider.SetValue(self.ynumber)
+        self.updateFailedArray()
+
+    def yspacingSliderChanged(self, event):
+        &#34;&#34;&#34;
+        Changes the y spacing combo box value to match the y spacing slider value
+        &#34;&#34;&#34;
+        self.yspacing = self.yspacingSlider.GetValue()
+        self.yspacingSpinBox.SetValue(self.yspacing)
+        self.updateFailedArray()
+
+    def yspacingSpinBoxChanged(self, event):
+        &#34;&#34;&#34;
+        Changes the y spacing slider value to match the y spacing combo box value
+        &#34;&#34;&#34;
+        self.yspacing = self.yspacingSpinBox.GetValue()
+        self.yspacingSlider.SetValue(self.yspacing)
+        self.updateFailedArray()
+
+    def aziSliderChanged(self, event):
+        &#34;&#34;&#34;
+        Changes the azi combo box value to match the azi slider value
+        &#34;&#34;&#34;
+        self.azi = self.aziSlider.GetValue()
+        self.aziSpinBox.SetValue(self.azi)
+
+    def aziSpinBoxChanged(self, event):
+        &#34;&#34;&#34;
+        Changes the azi slider value to match the azi combo box value
+        &#34;&#34;&#34;
+        self.azi = self.aziSpinBox.GetValue()
+        self.aziSlider.SetValue(self.azi)
+
+    def eleSliderChanged(self, event):
+        &#34;&#34;&#34;
+        Changes the ele combo box value to match the ele slider value
+        &#34;&#34;&#34;
+        self.ele = self.eleSlider.GetValue()
+        self.eleSpinBox.SetValue(self.ele)
+
+    def eleSpinBoxChanged(self, event):
+        &#34;&#34;&#34;
+        Changes the ele slider value to match the ele combo box value
+        &#34;&#34;&#34;
+        self.ele = self.eleSpinBox.GetValue()
+        self.eleSlider.SetValue(self.ele)
+
+    def xwindowChanged(self, event):
+        &#34;&#34;&#34;
+        Changes the shading on the x
+
+        Options:
+            * Square (Default)
+            * Chebyshev
+            * Taylor
+            * Hamming
+            * Hanning
+        &#34;&#34;&#34;
+        self.xshading =  self.xwindowSelector.GetValue()
+
+    def ywindowChanged(self, event):
+        &#34;&#34;&#34;
+        Changes the shading on the y dimension
+
+        Options:
+            * Square (Default)
+            * Chebyshev
+            * Taylor
+            * Hamming
+            * Hanning
+        &#34;&#34;&#34;
+        self.yshading =  self.ywindowSelector.GetValue()
+
+    def graphComboSelect(self, event):
+        &#34;&#34;&#34;
+        Changes the type of graph
+
+        Options:
+            * 3D Intensity (Default)
+            * 2D Polar
+        &#34;&#34;&#34;
+        self.graphMode = self.graphCombo.GetValue()
+
+    def presetSave(self, event):
+        &#34;&#34;&#34;
+        Save the current state of the program to be recalled later
+        &#34;&#34;&#34;
+        print(&#34;Saving Config&#34;)
+        app.presetDialog()
+
+    def presetLoad(self, event):
+        &#34;&#34;&#34;
+        Load a prior used state of the program to be used
+
+        FIle Type required &#39;.sham&#39;
+        &#34;&#34;&#34;
+        with ZipFile(self.preset[event.GetId()]) as myzip:
+            myzip.extract(&#34;current_state.json&#34;)
+            myzip.extract(&#34;fails.npy&#34;)
+
+        with open(&#34;current_state.json&#34;) as f:
+            data = json.load(f)
+
+        self.xnumber = data[&#34;xnumber&#34;]
+        self.xspacing = data[&#34;xspacing&#34;]
+        self.ynumber = data[&#34;ynumber&#34;]
+        self.yspacing = data[&#34;yspacing&#34;]
+        self.azi = data[&#34;azimuth&#34;]
+        self.ele = data[&#34;elevation&#34;]
+        self.graphMode = data[&#34;graphmode&#34;]
+        self.xshading = data[&#34;xshading&#34;]
+        self.yshading = data[&#34;yshading&#34;]
+
+        self.failedPanels = np.load(&#34;fails.npy&#34;)
+
+        os.remove(&#34;current_state.json&#34;)
+        os.remove(&#34;fails.npy&#34;)
+
+        self.xnumberSpinBox.SetValue(self.xnumber)
+        self.xnumberSlider.SetValue(self.xnumber)
+        self.xspacingSpinBox.SetValue(self.xspacing)
+        self.xspacingSlider.SetValue(self.xspacing)
+        self.ynumberSpinBox.SetValue(self.ynumber)
+        self.ynumberSlider.SetValue(self.ynumber)
+        self.yspacingSpinBox.SetValue(self.yspacing)
+        self.yspacingSlider.SetValue(self.yspacing)
+        self.aziSpinBox.SetValue(self.azi)
+        self.aziSlider.SetValue(self.azi)
+        self.eleSpinBox.SetValue(self.ele)
+        self.eleSlider.SetValue(self.ele)
+        self.graphCombo.SetValue(self.graphMode)
+        self.xwindowSelector.SetValue(self.xshading)
+        self.ywindowSelector.SetValue(self.yshading)
+
+    def updateFailedArray(self):
+        &#34;&#34;&#34;
+        Updates the array for panel failures on closure of the panel failed dialog
+        &#34;&#34;&#34;
+        self.failedPanels = np.ones((self.xnumber, self.ynumber), dtype=int)
+
+    def getDimensions(self):
+        &#34;&#34;&#34;
+        Gets the current array dimensions
+        &#34;&#34;&#34;
+        return (self.xnumber, self.ynumber)
+
+class panelDialogController(mw.panelDialog):
+    &#34;&#34;&#34;
+    A class which controls the panel dialog window GUI element
+
+    Overloads the panelDialog class generated by wxGlade
+
+    ...
+
+    Attributes
+    ----------
+
+    grid_sizer_1 : wxgridsizer
+        Grid which dynamically scales to the size of the array
+        Contains checkboxes which toggle pannels on and off
+    &#34;&#34;&#34;
+
+    def okPressed(self, event):
+        &#34;&#34;&#34;
+        Closes the dialog and saves the selected working panels to the array
+        &#34;&#34;&#34;
+        counterx = 0
+        countery = 0
+        counter = 0
+
+        while countery &lt; app.window.ynumber:
+            while counterx &lt; app.window.xnumber:
+                if self.buttons[counter].GetValue():
+                    app.window.failedPanels[counterx][countery] = 1
+                if not self.buttons[counter].GetValue():
+                    app.window.failedPanels[counterx][countery] = 0
+
+                counter += 1
+                counterx +=1
+
+            counterx = 0
+            countery += 1
+
+        print(app.window.failedPanels)
+        print(&#34;OK&#34;)
+        self.Close()
+
+    def configureSize(self):
+        &#34;&#34;&#34;
+        Dynamically scales the dialog box to match the size of the array
+        &#34;&#34;&#34;
+
+        print(app.window.failedPanels)
+        self.grid_sizer_1.SetCols(app.window.xnumber)
+        self.grid_sizer_1.SetRows(app.window.ynumber)
+        self.grid_sizer_1.Clear()
+
+        self.buttons = {}
+        counterx = 0
+        countery = 0
+        counter = 0
+
+        while countery &lt; app.window.ynumber:
+            while counterx &lt; app.window.xnumber:
+                self.buttons[counter] = wx.CheckBox(self, wx.ID_ANY, &#34;&#34;)
+                if app.window.failedPanels[counterx][countery] == 0:
+                    self.buttons[counter].SetValue(False)
+                if app.window.failedPanels[counterx][countery] == 1:
+                    self.buttons[counter].SetValue(True)
+                self.grid_sizer_1.Add(self.buttons[counter])
+
+                counter += 1
+                counterx +=1
+
+            counterx = 0
+            countery += 1
+
+        self.Fit()
+
+class presetDialogController(mw.presetDialog):
+    &#34;&#34;&#34;
+    A class which controls the preset dialog window GUI element
+
+    Overloads the presetDialog class generated by wxGlade
+    &#34;&#34;&#34;
+
+    def presetOKPressed(self, event):
+        &#34;&#34;&#34;
+        Save the current state with the filename specified in the box
+        &#34;&#34;&#34;
+        current_state = app.window.getState()
+        print(current_state)
+        f = open(&#34;current_state.json&#34;, &#34;w&#34;)
+        f.write(json.dumps(current_state))
+        f.close()
+        np.save(&#34;fails&#34;, app.window.failedPanels)
+
+        name = self.presetName.GetValue()
+
+        zipObj = ZipFile(name + &#34;.sham&#34;, &#34;w&#34;)
+        zipObj.write(&#34;current_state.json&#34;)
+        zipObj.write(&#34;fails.npy&#34;)
+        zipObj.close()
+
+        os.remove(&#34;current_state.json&#34;)
+        os.remove(&#34;fails.npy&#34;)
+
+        self.Close()
+
+class windowApp(wx.App):
+    &#34;&#34;&#34;
+    Overall app holding all the window and dialog objects
+    &#34;&#34;&#34;
+
+    def OnInit(self):
+        &#34;&#34;&#34;
+        Opens the Main Window on initialisation
+        &#34;&#34;&#34;
+        self.window = MainFrameController(None, wx.ID_ANY, &#34;&#34;)
+        self.window.Show()
+        return True
+
+    def panelDialog(self):
+        &#34;&#34;&#34;
+        Opens the Panel Dialog as a dialog box when the button is pressed in the Main Window
+        &#34;&#34;&#34;
+        self.dialog = panelDialogController(None, wx.ID_ANY, &#34;&#34;)
+        self.dialog.configureSize()
+        self.dialog.Show()
+
+    def presetDialog(self):
+        &#34;&#34;&#34;
+        Opens the Preset Dialog as a dialog box when the button is pressed in the Main Window
+        &#34;&#34;&#34;
+        self.dialog = presetDialogController(None, wx.ID_ANY, &#34;&#34;)
+        self.dialog.Show()
+
+if __name__ == &#34;__main__&#34;:
+    app = windowApp(0)
+    app.MainLoop()</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="MainWindowController.MainFrameController"><code class="flex name class">
+<span>class <span class="ident">MainFrameController</span></span>
+<span>(</span><span>*args, **kwds)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>A class which controls the main window GUI element
+and the array shape</p>
+<p>Overloads the mainFrame class generated by wxGlade</p>
+<p>&hellip;</p>
+<h2 id="attributes">Attributes</h2>
+<dl>
+<dt><strong><code>arraytype</code></strong> :&ensp;<code>string</code></dt>
+<dd>Type of array to use
+(Currently Linear or Rect)</dd>
+<dt><strong><code>xnumber</code></strong> :&ensp;<code>int</code></dt>
+<dd>Number of elements in the x axis</dd>
+<dt><strong><code>xspacing</code></strong> :&ensp;<code>float</code></dt>
+<dd>Spacing of the elements along the x axis
+(Normalized to wavelength)</dd>
+<dt><strong><code>xshading</code></strong> :&ensp;<code>string</code></dt>
+<dd>Type of shading employed in the x direction
+(Square [default], Chebyshev, Taylor, Hamming, Hanning)</dd>
+<dt><strong><code>ynumber</code></strong> :&ensp;<code>int</code></dt>
+<dd>Number of elements in the y axis</dd>
+<dt><strong><code>yspacing</code></strong> :&ensp;<code>float</code></dt>
+<dd>Spacing of the elements along the y axis
+(Normalized to wavelength)</dd>
+<dt><strong><code>yshading</code></strong> :&ensp;<code>string</code></dt>
+<dd>Type of shading employed in the y direction
+(Square [default], Chebyshev, Taylor, Hamming, Hanning)</dd>
+<dt><strong><code>azi</code></strong> :&ensp;<code>int</code></dt>
+<dd>Steering of the beam in the azimuthal direction
+(Range +/- 180 degrees)</dd>
+<dt><strong><code>ele</code></strong> :&ensp;<code>int</code></dt>
+<dd>Steering of the beam in elevation
+(Range +/- 90 degrees)</dd>
+<dt><strong><code>graphMode</code></strong> :&ensp;<code>string</code></dt>
+<dd>Type of graph to be displayed
+(currently 3D intensity or 2D polar)</dd>
+</dl>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>arraytype</code></strong> :&ensp;<code>string</code></dt>
+<dd>Type of array to use
+(Currently Linear or Rect)
+Default Rect</dd>
+<dt><strong><code>xnumber</code></strong> :&ensp;<code>int</code></dt>
+<dd>Number of elements in the x axis
+Default 1</dd>
+<dt><strong><code>xspacing</code></strong> :&ensp;<code>float</code></dt>
+<dd>Spacing of the elements along the x axis
+(Normalized to wavelength)
+Default 1</dd>
+<dt><strong><code>xshading</code></strong> :&ensp;<code>string</code></dt>
+<dd>Type of shading employed in the x direction
+(Square [default], Chebyshev, Taylor, Hamming, Hanning)</dd>
+<dt><strong><code>ynumber</code></strong> :&ensp;<code>int</code></dt>
+<dd>Number of elements in the y axis
+Default 1</dd>
+<dt><strong><code>yspacing</code></strong> :&ensp;<code>float</code></dt>
+<dd>Spacing of the elements along the y axis
+(Normalized to wavelength)
+Default 1</dd>
+<dt><strong><code>yshading</code></strong> :&ensp;<code>string</code></dt>
+<dd>Type of shading employed in the y direction
+(Square [default], Chebyshev, Taylor, Hamming, Hanning)</dd>
+<dt><strong><code>azi</code></strong> :&ensp;<code>int</code></dt>
+<dd>Steering of the beam in the azimuthal direction
+(Range +/- 180 degrees)
+Default 0</dd>
+<dt><strong><code>ele</code></strong> :&ensp;<code>int</code></dt>
+<dd>Steering of the beam in elevation
+(Range +/- 90 degrees)
+Default 0</dd>
+<dt><strong><code>graphMode</code></strong> :&ensp;<code>string</code></dt>
+<dd>Type of graph to be displayed
+(currently 3D intensity or 2D polar)
+Default 3D Surface</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class MainFrameController(mw.mainFrame):
+    &#34;&#34;&#34;
+    A class which controls the main window GUI element
+    and the array shape
+
+    Overloads the mainFrame class generated by wxGlade
+
+    ...
+
+    Attributes
+    ----------
+
+    arraytype : string
+        Type of array to use
+        (Currently Linear or Rect)
+    xnumber : int
+        Number of elements in the x axis
+    xspacing : float
+        Spacing of the elements along the x axis
+        (Normalized to wavelength)
+    xshading : string
+        Type of shading employed in the x direction
+        (Square [default], Chebyshev, Taylor, Hamming, Hanning)
+    ynumber : int
+        Number of elements in the y axis
+    yspacing : float
+        Spacing of the elements along the y axis
+        (Normalized to wavelength)
+    yshading : string
+        Type of shading employed in the y direction
+        (Square [default], Chebyshev, Taylor, Hamming, Hanning)
+    azi : int
+        Steering of the beam in the azimuthal direction
+        (Range +/- 180 degrees)
+    ele : int
+        Steering of the beam in elevation
+        (Range +/- 90 degrees)
+    graphMode : string
+        Type of graph to be displayed
+        (currently 3D intensity or 2D polar)
+    &#34;&#34;&#34;
+
+
+    def __init__(self, *args, **kwds):
+        &#34;&#34;&#34;
+        Parameters
+        ----------
+        arraytype : string
+            Type of array to use
+            (Currently Linear or Rect)
+            Default Rect
+        xnumber : int
+            Number of elements in the x axis
+            Default 1
+        xspacing : float
+            Spacing of the elements along the x axis
+            (Normalized to wavelength)
+            Default 1
+        xshading : string
+            Type of shading employed in the x direction
+            (Square [default], Chebyshev, Taylor, Hamming, Hanning)
+        ynumber : int
+            Number of elements in the y axis
+            Default 1
+        yspacing : float
+            Spacing of the elements along the y axis
+            (Normalized to wavelength)
+            Default 1
+        yshading : string
+            Type of shading employed in the y direction
+            (Square [default], Chebyshev, Taylor, Hamming, Hanning)
+        azi : int
+            Steering of the beam in the azimuthal direction
+            (Range +/- 180 degrees)
+            Default 0
+        ele : int
+            Steering of the beam in elevation
+            (Range +/- 90 degrees)
+            Default 0
+        graphMode : string
+            Type of graph to be displayed
+            (currently 3D intensity or 2D polar)
+            Default 3D Surface
+        &#34;&#34;&#34;
+
+
+        self.arraytype = &#34;rect&#34;
+        self.xnumber = 1
+        self.xspacing = 1
+        self.ynumber = 1
+        self.yspacing = 1
+        self.azi = 0
+        self.ele = 0
+        self.graphMode = &#34;3D Surface&#34;
+        self.xshading = &#34;Square&#34;
+        self.yshading = &#34;Square&#34;
+
+        self.updateFailedArray()
+
+        os.chdir(&#34;Presets/&#34;)
+
+        super().__init__(*args, **kwds)
+        wxglade_tmp_menu = wx.Menu()
+        number = 0
+        self.preset = {}
+        for file in glob.glob(&#34;*.sham&#34;):
+            wxglade_tmp_menu.Append(number, file[:-5])
+            self.preset[number] = file
+            self.Bind(wx.EVT_MENU, self.presetLoad, id=number)
+            number += 1
+
+        self.frame_menubar.Insert(3, wxglade_tmp_menu, &#34;Presets&#34;)
+
+
+    def quitPressed(self, event):
+        &#34;&#34;&#34;
+        Exits the program
+        &#34;&#34;&#34;
+        print(&#34;quitting&#34;)
+        exit()
+
+    def panelButtonPressed(self, event):
+        &#34;&#34;&#34;
+        Opens failed panels Dialog
+        &#34;&#34;&#34;
+        app.panelDialog()
+
+    def surface3d(self, pattern, xgrid, ygrid):
+        &#34;&#34;&#34;
+        Shows the 3D surface plot
+
+        Parameters
+        ----------
+        pattern : dictionary
+            Contains the information regarding array factor
+        xgrid : array
+            Array for the points on the x axis
+        ygrid : array
+            Array for the points on the y axis
+        &#34;&#34;&#34;
+        fig = pyplt.figure()
+        ax = pyplt.axes(projection=&#39;3d&#39;)
+
+        AF = pattern[&#39;array_factor&#39;]
+
+        ax.plot_surface(xgrid, ygrid, 20*np.log10(np.abs(AF) + 0.0001),cmap=cm.coolwarm, linewidth=0)
+        ax.set_title(&#39;Surface plot&#39;)
+
+        ax.set_xlabel(&#39;y&#39;)
+        ax.set_ylabel(&#39;x&#39;)
+        ax.set_zlabel(&#39;Intensity&#39;)
+
+        ax.view_init(60, 35)
+        pyplt.show()
+
+    def polar2d(self, pattern, xgrid, ygrid):
+        &#34;&#34;&#34;
+        Shows the 2D Polar plot
+
+        Parameters
+        ----------
+        pattern : dictionary
+            Contains the information regarding array factor
+        xgrid : array
+            Array for the points on the x axis
+        ygrid : array
+            Array for the points on the y axis
+        &#34;&#34;&#34;
+
+        azimuth = pattern[&#39;azimuth&#39;]
+        AF = pattern[&#39;array_factor&#39;]
+
+        middle = math.ceil(AF.shape[1]/2)
+
+        fig = pyplt.figure()
+        ax = pyplt.axes(polar=True)
+
+        ax.plot(azimuth/180 * np.pi, 20*np.log10(np.abs(AF[:, middle]) + 0.000001),color=&#39;green&#39;, linewidth=2)
+        ax.set_rmin(-70)
+
+        pyplt.show()
+
+
+    def showGraph(self, event):
+        &#34;&#34;&#34;
+        Commands the program to display the graph selected
+        &#34;&#34;&#34;
+        array = antarray.RectArray(self.xnumber, self.ynumber, self.xspacing/2, self.yspacing/2)
+        #theta = np.arange(-180, 180, 0.1)
+
+        array.toggle_panels(self.failedPanels)
+
+        pattern = array.get_pattern(beam_az = self.azi, beam_el = self.ele, windowx=self.xshading, windowy=self.yshading)
+
+        x = np.linspace(-90, 90, pattern[&#39;array_factor&#39;].shape[1])
+        y = np.linspace(-90, 90, pattern[&#39;array_factor&#39;].shape[0])
+
+        xgrid, ygrid = np.meshgrid(x,y)
+
+        graph_type = {
+        &#34;3D Surface&#34; : self.surface3d,
+        &#34;2D Polar&#34; : self.polar2d,
+        }
+
+        graph_type[self.graphMode](pattern, xgrid, ygrid)
+
+    def getState(self):
+        &#34;&#34;&#34;
+        Generates a dictionary of values for the current state
+        &#34;&#34;&#34;
+        current_state = {   &#34;xnumber&#34; : self.xnumber,
+                            &#34;xspacing&#34; : self.xspacing,
+                            &#34;ynumber&#34; : self.ynumber,
+                            &#34;yspacing&#34; : self.yspacing,
+                            &#34;azimuth&#34; : self.azi,
+                            &#34;elevation&#34; : self.ele,
+                            &#34;graphmode&#34; : self.graphMode,
+                            &#34;xshading&#34; : self.xshading,
+                            &#34;yshading&#34; : self.yshading}
+
+        return current_state
+
+    def xnumberSliderChanged(self, event):
+        &#34;&#34;&#34;
+        Changes the x number combo box value to match the x number slider value
+        &#34;&#34;&#34;
+        self.xnumber = self.xnumberSlider.GetValue()
+        self.xnumberSpinBox.SetValue(self.xnumber)
+        self.updateFailedArray()
+
+    def xnumberSpinBoxChanged(self, event):
+        &#34;&#34;&#34;
+        Changes the x number slider value to match the x number combo box value
+        &#34;&#34;&#34;
+        self.xnumber = self.xnumberSpinBox.GetValue()
+        self.xnumberSlider.SetValue(self.xnumber)
+        self.updateFailedArray()
+
+    def xspacingSliderChanged(self, event):
+        &#34;&#34;&#34;
+        Changes the x spacing combo box value to match the x spacing slider value
+        &#34;&#34;&#34;
+        self.xspacing = self.xspacingSlider.GetValue()
+        self.xspacingSpinBox.SetValue(self.xspacing)
+        self.updateFailedArray()
+
+    def xspacingSpinBoxChanged(self, event):
+        &#34;&#34;&#34;
+        Changes the x spacing slider value to match the x spacing combo box value
+        &#34;&#34;&#34;
+        self.xspacing = self.xspacingSpinBox.GetValue()
+        self.xspacingSlider.SetValue(self.xspacing)
+        self.updateFailedArray()
+
+    def ynumberSliderChanged(self, event):
+        &#34;&#34;&#34;
+        Changes the y number combo box value to match the y number slider value
+        &#34;&#34;&#34;
+        self.ynumber = self.ynumberSlider.GetValue()
+        self.ynumberSpinBox.SetValue(self.ynumber)
+        self.updateFailedArray()
+
+    def ynumberSpinBoxChanged(self, event):
+        &#34;&#34;&#34;
+        Changes the y number slider value to match the y number combo box value
+        &#34;&#34;&#34;
+        self.ynumber = self.ynumberSpinBox.GetValue()
+        self.ynumberSlider.SetValue(self.ynumber)
+        self.updateFailedArray()
+
+    def yspacingSliderChanged(self, event):
+        &#34;&#34;&#34;
+        Changes the y spacing combo box value to match the y spacing slider value
+        &#34;&#34;&#34;
+        self.yspacing = self.yspacingSlider.GetValue()
+        self.yspacingSpinBox.SetValue(self.yspacing)
+        self.updateFailedArray()
+
+    def yspacingSpinBoxChanged(self, event):
+        &#34;&#34;&#34;
+        Changes the y spacing slider value to match the y spacing combo box value
+        &#34;&#34;&#34;
+        self.yspacing = self.yspacingSpinBox.GetValue()
+        self.yspacingSlider.SetValue(self.yspacing)
+        self.updateFailedArray()
+
+    def aziSliderChanged(self, event):
+        &#34;&#34;&#34;
+        Changes the azi combo box value to match the azi slider value
+        &#34;&#34;&#34;
+        self.azi = self.aziSlider.GetValue()
+        self.aziSpinBox.SetValue(self.azi)
+
+    def aziSpinBoxChanged(self, event):
+        &#34;&#34;&#34;
+        Changes the azi slider value to match the azi combo box value
+        &#34;&#34;&#34;
+        self.azi = self.aziSpinBox.GetValue()
+        self.aziSlider.SetValue(self.azi)
+
+    def eleSliderChanged(self, event):
+        &#34;&#34;&#34;
+        Changes the ele combo box value to match the ele slider value
+        &#34;&#34;&#34;
+        self.ele = self.eleSlider.GetValue()
+        self.eleSpinBox.SetValue(self.ele)
+
+    def eleSpinBoxChanged(self, event):
+        &#34;&#34;&#34;
+        Changes the ele slider value to match the ele combo box value
+        &#34;&#34;&#34;
+        self.ele = self.eleSpinBox.GetValue()
+        self.eleSlider.SetValue(self.ele)
+
+    def xwindowChanged(self, event):
+        &#34;&#34;&#34;
+        Changes the shading on the x
+
+        Options:
+            * Square (Default)
+            * Chebyshev
+            * Taylor
+            * Hamming
+            * Hanning
+        &#34;&#34;&#34;
+        self.xshading =  self.xwindowSelector.GetValue()
+
+    def ywindowChanged(self, event):
+        &#34;&#34;&#34;
+        Changes the shading on the y dimension
+
+        Options:
+            * Square (Default)
+            * Chebyshev
+            * Taylor
+            * Hamming
+            * Hanning
+        &#34;&#34;&#34;
+        self.yshading =  self.ywindowSelector.GetValue()
+
+    def graphComboSelect(self, event):
+        &#34;&#34;&#34;
+        Changes the type of graph
+
+        Options:
+            * 3D Intensity (Default)
+            * 2D Polar
+        &#34;&#34;&#34;
+        self.graphMode = self.graphCombo.GetValue()
+
+    def presetSave(self, event):
+        &#34;&#34;&#34;
+        Save the current state of the program to be recalled later
+        &#34;&#34;&#34;
+        print(&#34;Saving Config&#34;)
+        app.presetDialog()
+
+    def presetLoad(self, event):
+        &#34;&#34;&#34;
+        Load a prior used state of the program to be used
+
+        FIle Type required &#39;.sham&#39;
+        &#34;&#34;&#34;
+        with ZipFile(self.preset[event.GetId()]) as myzip:
+            myzip.extract(&#34;current_state.json&#34;)
+            myzip.extract(&#34;fails.npy&#34;)
+
+        with open(&#34;current_state.json&#34;) as f:
+            data = json.load(f)
+
+        self.xnumber = data[&#34;xnumber&#34;]
+        self.xspacing = data[&#34;xspacing&#34;]
+        self.ynumber = data[&#34;ynumber&#34;]
+        self.yspacing = data[&#34;yspacing&#34;]
+        self.azi = data[&#34;azimuth&#34;]
+        self.ele = data[&#34;elevation&#34;]
+        self.graphMode = data[&#34;graphmode&#34;]
+        self.xshading = data[&#34;xshading&#34;]
+        self.yshading = data[&#34;yshading&#34;]
+
+        self.failedPanels = np.load(&#34;fails.npy&#34;)
+
+        os.remove(&#34;current_state.json&#34;)
+        os.remove(&#34;fails.npy&#34;)
+
+        self.xnumberSpinBox.SetValue(self.xnumber)
+        self.xnumberSlider.SetValue(self.xnumber)
+        self.xspacingSpinBox.SetValue(self.xspacing)
+        self.xspacingSlider.SetValue(self.xspacing)
+        self.ynumberSpinBox.SetValue(self.ynumber)
+        self.ynumberSlider.SetValue(self.ynumber)
+        self.yspacingSpinBox.SetValue(self.yspacing)
+        self.yspacingSlider.SetValue(self.yspacing)
+        self.aziSpinBox.SetValue(self.azi)
+        self.aziSlider.SetValue(self.azi)
+        self.eleSpinBox.SetValue(self.ele)
+        self.eleSlider.SetValue(self.ele)
+        self.graphCombo.SetValue(self.graphMode)
+        self.xwindowSelector.SetValue(self.xshading)
+        self.ywindowSelector.SetValue(self.yshading)
+
+    def updateFailedArray(self):
+        &#34;&#34;&#34;
+        Updates the array for panel failures on closure of the panel failed dialog
+        &#34;&#34;&#34;
+        self.failedPanels = np.ones((self.xnumber, self.ynumber), dtype=int)
+
+    def getDimensions(self):
+        &#34;&#34;&#34;
+        Gets the current array dimensions
+        &#34;&#34;&#34;
+        return (self.xnumber, self.ynumber)</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>GUI.MainWindow.mainFrame</li>
+<li>wx._core.Frame</li>
+<li>wx._core.TopLevelWindow</li>
+<li>wx._core.NonOwnedWindow</li>
+<li>wx._core.Window</li>
+<li>wx._core.WindowBase</li>
+<li>wx._core.EvtHandler</li>
+<li>wx._core.Object</li>
+<li>wx._core.Trackable</li>
+<li>sip.wrapper</li>
+<li>sip.simplewrapper</li>
+</ul>
+<h3>Methods</h3>
+<dl>
+<dt id="MainWindowController.MainFrameController.aziSliderChanged"><code class="name flex">
+<span>def <span class="ident">aziSliderChanged</span></span>(<span>self, event)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Changes the azi combo box value to match the azi slider value</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def aziSliderChanged(self, event):
+    &#34;&#34;&#34;
+    Changes the azi combo box value to match the azi slider value
+    &#34;&#34;&#34;
+    self.azi = self.aziSlider.GetValue()
+    self.aziSpinBox.SetValue(self.azi)</code></pre>
+</details>
+</dd>
+<dt id="MainWindowController.MainFrameController.aziSpinBoxChanged"><code class="name flex">
+<span>def <span class="ident">aziSpinBoxChanged</span></span>(<span>self, event)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Changes the azi slider value to match the azi combo box value</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def aziSpinBoxChanged(self, event):
+    &#34;&#34;&#34;
+    Changes the azi slider value to match the azi combo box value
+    &#34;&#34;&#34;
+    self.azi = self.aziSpinBox.GetValue()
+    self.aziSlider.SetValue(self.azi)</code></pre>
+</details>
+</dd>
+<dt id="MainWindowController.MainFrameController.eleSliderChanged"><code class="name flex">
+<span>def <span class="ident">eleSliderChanged</span></span>(<span>self, event)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Changes the ele combo box value to match the ele slider value</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def eleSliderChanged(self, event):
+    &#34;&#34;&#34;
+    Changes the ele combo box value to match the ele slider value
+    &#34;&#34;&#34;
+    self.ele = self.eleSlider.GetValue()
+    self.eleSpinBox.SetValue(self.ele)</code></pre>
+</details>
+</dd>
+<dt id="MainWindowController.MainFrameController.eleSpinBoxChanged"><code class="name flex">
+<span>def <span class="ident">eleSpinBoxChanged</span></span>(<span>self, event)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Changes the ele slider value to match the ele combo box value</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def eleSpinBoxChanged(self, event):
+    &#34;&#34;&#34;
+    Changes the ele slider value to match the ele combo box value
+    &#34;&#34;&#34;
+    self.ele = self.eleSpinBox.GetValue()
+    self.eleSlider.SetValue(self.ele)</code></pre>
+</details>
+</dd>
+<dt id="MainWindowController.MainFrameController.getDimensions"><code class="name flex">
+<span>def <span class="ident">getDimensions</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Gets the current array dimensions</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def getDimensions(self):
+    &#34;&#34;&#34;
+    Gets the current array dimensions
+    &#34;&#34;&#34;
+    return (self.xnumber, self.ynumber)</code></pre>
+</details>
+</dd>
+<dt id="MainWindowController.MainFrameController.getState"><code class="name flex">
+<span>def <span class="ident">getState</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Generates a dictionary of values for the current state</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def getState(self):
+    &#34;&#34;&#34;
+    Generates a dictionary of values for the current state
+    &#34;&#34;&#34;
+    current_state = {   &#34;xnumber&#34; : self.xnumber,
+                        &#34;xspacing&#34; : self.xspacing,
+                        &#34;ynumber&#34; : self.ynumber,
+                        &#34;yspacing&#34; : self.yspacing,
+                        &#34;azimuth&#34; : self.azi,
+                        &#34;elevation&#34; : self.ele,
+                        &#34;graphmode&#34; : self.graphMode,
+                        &#34;xshading&#34; : self.xshading,
+                        &#34;yshading&#34; : self.yshading}
+
+    return current_state</code></pre>
+</details>
+</dd>
+<dt id="MainWindowController.MainFrameController.graphComboSelect"><code class="name flex">
+<span>def <span class="ident">graphComboSelect</span></span>(<span>self, event)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Changes the type of graph</p>
+<h2 id="options">Options</h2>
+<ul>
+<li>3D Intensity (Default)</li>
+<li>2D Polar</li>
+</ul></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def graphComboSelect(self, event):
+    &#34;&#34;&#34;
+    Changes the type of graph
+
+    Options:
+        * 3D Intensity (Default)
+        * 2D Polar
+    &#34;&#34;&#34;
+    self.graphMode = self.graphCombo.GetValue()</code></pre>
+</details>
+</dd>
+<dt id="MainWindowController.MainFrameController.panelButtonPressed"><code class="name flex">
+<span>def <span class="ident">panelButtonPressed</span></span>(<span>self, event)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Opens failed panels Dialog</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def panelButtonPressed(self, event):
+    &#34;&#34;&#34;
+    Opens failed panels Dialog
+    &#34;&#34;&#34;
+    app.panelDialog()</code></pre>
+</details>
+</dd>
+<dt id="MainWindowController.MainFrameController.polar2d"><code class="name flex">
+<span>def <span class="ident">polar2d</span></span>(<span>self, pattern, xgrid, ygrid)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Shows the 2D Polar plot</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>pattern</code></strong> :&ensp;<code>dictionary</code></dt>
+<dd>Contains the information regarding array factor</dd>
+<dt><strong><code>xgrid</code></strong> :&ensp;<code>array</code></dt>
+<dd>Array for the points on the x axis</dd>
+<dt><strong><code>ygrid</code></strong> :&ensp;<code>array</code></dt>
+<dd>Array for the points on the y axis</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def polar2d(self, pattern, xgrid, ygrid):
+    &#34;&#34;&#34;
+    Shows the 2D Polar plot
+
+    Parameters
+    ----------
+    pattern : dictionary
+        Contains the information regarding array factor
+    xgrid : array
+        Array for the points on the x axis
+    ygrid : array
+        Array for the points on the y axis
+    &#34;&#34;&#34;
+
+    azimuth = pattern[&#39;azimuth&#39;]
+    AF = pattern[&#39;array_factor&#39;]
+
+    middle = math.ceil(AF.shape[1]/2)
+
+    fig = pyplt.figure()
+    ax = pyplt.axes(polar=True)
+
+    ax.plot(azimuth/180 * np.pi, 20*np.log10(np.abs(AF[:, middle]) + 0.000001),color=&#39;green&#39;, linewidth=2)
+    ax.set_rmin(-70)
+
+    pyplt.show()</code></pre>
+</details>
+</dd>
+<dt id="MainWindowController.MainFrameController.presetLoad"><code class="name flex">
+<span>def <span class="ident">presetLoad</span></span>(<span>self, event)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Load a prior used state of the program to be used</p>
+<p>FIle Type required '.sham'</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def presetLoad(self, event):
+    &#34;&#34;&#34;
+    Load a prior used state of the program to be used
+
+    FIle Type required &#39;.sham&#39;
+    &#34;&#34;&#34;
+    with ZipFile(self.preset[event.GetId()]) as myzip:
+        myzip.extract(&#34;current_state.json&#34;)
+        myzip.extract(&#34;fails.npy&#34;)
+
+    with open(&#34;current_state.json&#34;) as f:
+        data = json.load(f)
+
+    self.xnumber = data[&#34;xnumber&#34;]
+    self.xspacing = data[&#34;xspacing&#34;]
+    self.ynumber = data[&#34;ynumber&#34;]
+    self.yspacing = data[&#34;yspacing&#34;]
+    self.azi = data[&#34;azimuth&#34;]
+    self.ele = data[&#34;elevation&#34;]
+    self.graphMode = data[&#34;graphmode&#34;]
+    self.xshading = data[&#34;xshading&#34;]
+    self.yshading = data[&#34;yshading&#34;]
+
+    self.failedPanels = np.load(&#34;fails.npy&#34;)
+
+    os.remove(&#34;current_state.json&#34;)
+    os.remove(&#34;fails.npy&#34;)
+
+    self.xnumberSpinBox.SetValue(self.xnumber)
+    self.xnumberSlider.SetValue(self.xnumber)
+    self.xspacingSpinBox.SetValue(self.xspacing)
+    self.xspacingSlider.SetValue(self.xspacing)
+    self.ynumberSpinBox.SetValue(self.ynumber)
+    self.ynumberSlider.SetValue(self.ynumber)
+    self.yspacingSpinBox.SetValue(self.yspacing)
+    self.yspacingSlider.SetValue(self.yspacing)
+    self.aziSpinBox.SetValue(self.azi)
+    self.aziSlider.SetValue(self.azi)
+    self.eleSpinBox.SetValue(self.ele)
+    self.eleSlider.SetValue(self.ele)
+    self.graphCombo.SetValue(self.graphMode)
+    self.xwindowSelector.SetValue(self.xshading)
+    self.ywindowSelector.SetValue(self.yshading)</code></pre>
+</details>
+</dd>
+<dt id="MainWindowController.MainFrameController.presetSave"><code class="name flex">
+<span>def <span class="ident">presetSave</span></span>(<span>self, event)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Save the current state of the program to be recalled later</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def presetSave(self, event):
+    &#34;&#34;&#34;
+    Save the current state of the program to be recalled later
+    &#34;&#34;&#34;
+    print(&#34;Saving Config&#34;)
+    app.presetDialog()</code></pre>
+</details>
+</dd>
+<dt id="MainWindowController.MainFrameController.quitPressed"><code class="name flex">
+<span>def <span class="ident">quitPressed</span></span>(<span>self, event)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Exits the program</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def quitPressed(self, event):
+    &#34;&#34;&#34;
+    Exits the program
+    &#34;&#34;&#34;
+    print(&#34;quitting&#34;)
+    exit()</code></pre>
+</details>
+</dd>
+<dt id="MainWindowController.MainFrameController.showGraph"><code class="name flex">
+<span>def <span class="ident">showGraph</span></span>(<span>self, event)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Commands the program to display the graph selected</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def showGraph(self, event):
+    &#34;&#34;&#34;
+    Commands the program to display the graph selected
+    &#34;&#34;&#34;
+    array = antarray.RectArray(self.xnumber, self.ynumber, self.xspacing/2, self.yspacing/2)
+    #theta = np.arange(-180, 180, 0.1)
+
+    array.toggle_panels(self.failedPanels)
+
+    pattern = array.get_pattern(beam_az = self.azi, beam_el = self.ele, windowx=self.xshading, windowy=self.yshading)
+
+    x = np.linspace(-90, 90, pattern[&#39;array_factor&#39;].shape[1])
+    y = np.linspace(-90, 90, pattern[&#39;array_factor&#39;].shape[0])
+
+    xgrid, ygrid = np.meshgrid(x,y)
+
+    graph_type = {
+    &#34;3D Surface&#34; : self.surface3d,
+    &#34;2D Polar&#34; : self.polar2d,
+    }
+
+    graph_type[self.graphMode](pattern, xgrid, ygrid)</code></pre>
+</details>
+</dd>
+<dt id="MainWindowController.MainFrameController.surface3d"><code class="name flex">
+<span>def <span class="ident">surface3d</span></span>(<span>self, pattern, xgrid, ygrid)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Shows the 3D surface plot</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>pattern</code></strong> :&ensp;<code>dictionary</code></dt>
+<dd>Contains the information regarding array factor</dd>
+<dt><strong><code>xgrid</code></strong> :&ensp;<code>array</code></dt>
+<dd>Array for the points on the x axis</dd>
+<dt><strong><code>ygrid</code></strong> :&ensp;<code>array</code></dt>
+<dd>Array for the points on the y axis</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def surface3d(self, pattern, xgrid, ygrid):
+    &#34;&#34;&#34;
+    Shows the 3D surface plot
+
+    Parameters
+    ----------
+    pattern : dictionary
+        Contains the information regarding array factor
+    xgrid : array
+        Array for the points on the x axis
+    ygrid : array
+        Array for the points on the y axis
+    &#34;&#34;&#34;
+    fig = pyplt.figure()
+    ax = pyplt.axes(projection=&#39;3d&#39;)
+
+    AF = pattern[&#39;array_factor&#39;]
+
+    ax.plot_surface(xgrid, ygrid, 20*np.log10(np.abs(AF) + 0.0001),cmap=cm.coolwarm, linewidth=0)
+    ax.set_title(&#39;Surface plot&#39;)
+
+    ax.set_xlabel(&#39;y&#39;)
+    ax.set_ylabel(&#39;x&#39;)
+    ax.set_zlabel(&#39;Intensity&#39;)
+
+    ax.view_init(60, 35)
+    pyplt.show()</code></pre>
+</details>
+</dd>
+<dt id="MainWindowController.MainFrameController.updateFailedArray"><code class="name flex">
+<span>def <span class="ident">updateFailedArray</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Updates the array for panel failures on closure of the panel failed dialog</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def updateFailedArray(self):
+    &#34;&#34;&#34;
+    Updates the array for panel failures on closure of the panel failed dialog
+    &#34;&#34;&#34;
+    self.failedPanels = np.ones((self.xnumber, self.ynumber), dtype=int)</code></pre>
+</details>
+</dd>
+<dt id="MainWindowController.MainFrameController.xnumberSliderChanged"><code class="name flex">
+<span>def <span class="ident">xnumberSliderChanged</span></span>(<span>self, event)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Changes the x number combo box value to match the x number slider value</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def xnumberSliderChanged(self, event):
+    &#34;&#34;&#34;
+    Changes the x number combo box value to match the x number slider value
+    &#34;&#34;&#34;
+    self.xnumber = self.xnumberSlider.GetValue()
+    self.xnumberSpinBox.SetValue(self.xnumber)
+    self.updateFailedArray()</code></pre>
+</details>
+</dd>
+<dt id="MainWindowController.MainFrameController.xnumberSpinBoxChanged"><code class="name flex">
+<span>def <span class="ident">xnumberSpinBoxChanged</span></span>(<span>self, event)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Changes the x number slider value to match the x number combo box value</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def xnumberSpinBoxChanged(self, event):
+    &#34;&#34;&#34;
+    Changes the x number slider value to match the x number combo box value
+    &#34;&#34;&#34;
+    self.xnumber = self.xnumberSpinBox.GetValue()
+    self.xnumberSlider.SetValue(self.xnumber)
+    self.updateFailedArray()</code></pre>
+</details>
+</dd>
+<dt id="MainWindowController.MainFrameController.xspacingSliderChanged"><code class="name flex">
+<span>def <span class="ident">xspacingSliderChanged</span></span>(<span>self, event)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Changes the x spacing combo box value to match the x spacing slider value</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def xspacingSliderChanged(self, event):
+    &#34;&#34;&#34;
+    Changes the x spacing combo box value to match the x spacing slider value
+    &#34;&#34;&#34;
+    self.xspacing = self.xspacingSlider.GetValue()
+    self.xspacingSpinBox.SetValue(self.xspacing)
+    self.updateFailedArray()</code></pre>
+</details>
+</dd>
+<dt id="MainWindowController.MainFrameController.xspacingSpinBoxChanged"><code class="name flex">
+<span>def <span class="ident">xspacingSpinBoxChanged</span></span>(<span>self, event)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Changes the x spacing slider value to match the x spacing combo box value</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def xspacingSpinBoxChanged(self, event):
+    &#34;&#34;&#34;
+    Changes the x spacing slider value to match the x spacing combo box value
+    &#34;&#34;&#34;
+    self.xspacing = self.xspacingSpinBox.GetValue()
+    self.xspacingSlider.SetValue(self.xspacing)
+    self.updateFailedArray()</code></pre>
+</details>
+</dd>
+<dt id="MainWindowController.MainFrameController.xwindowChanged"><code class="name flex">
+<span>def <span class="ident">xwindowChanged</span></span>(<span>self, event)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Changes the shading on the x</p>
+<h2 id="options">Options</h2>
+<ul>
+<li>Square (Default)</li>
+<li>Chebyshev</li>
+<li>Taylor</li>
+<li>Hamming</li>
+<li>Hanning</li>
+</ul></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def xwindowChanged(self, event):
+    &#34;&#34;&#34;
+    Changes the shading on the x
+
+    Options:
+        * Square (Default)
+        * Chebyshev
+        * Taylor
+        * Hamming
+        * Hanning
+    &#34;&#34;&#34;
+    self.xshading =  self.xwindowSelector.GetValue()</code></pre>
+</details>
+</dd>
+<dt id="MainWindowController.MainFrameController.ynumberSliderChanged"><code class="name flex">
+<span>def <span class="ident">ynumberSliderChanged</span></span>(<span>self, event)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Changes the y number combo box value to match the y number slider value</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def ynumberSliderChanged(self, event):
+    &#34;&#34;&#34;
+    Changes the y number combo box value to match the y number slider value
+    &#34;&#34;&#34;
+    self.ynumber = self.ynumberSlider.GetValue()
+    self.ynumberSpinBox.SetValue(self.ynumber)
+    self.updateFailedArray()</code></pre>
+</details>
+</dd>
+<dt id="MainWindowController.MainFrameController.ynumberSpinBoxChanged"><code class="name flex">
+<span>def <span class="ident">ynumberSpinBoxChanged</span></span>(<span>self, event)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Changes the y number slider value to match the y number combo box value</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def ynumberSpinBoxChanged(self, event):
+    &#34;&#34;&#34;
+    Changes the y number slider value to match the y number combo box value
+    &#34;&#34;&#34;
+    self.ynumber = self.ynumberSpinBox.GetValue()
+    self.ynumberSlider.SetValue(self.ynumber)
+    self.updateFailedArray()</code></pre>
+</details>
+</dd>
+<dt id="MainWindowController.MainFrameController.yspacingSliderChanged"><code class="name flex">
+<span>def <span class="ident">yspacingSliderChanged</span></span>(<span>self, event)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Changes the y spacing combo box value to match the y spacing slider value</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def yspacingSliderChanged(self, event):
+    &#34;&#34;&#34;
+    Changes the y spacing combo box value to match the y spacing slider value
+    &#34;&#34;&#34;
+    self.yspacing = self.yspacingSlider.GetValue()
+    self.yspacingSpinBox.SetValue(self.yspacing)
+    self.updateFailedArray()</code></pre>
+</details>
+</dd>
+<dt id="MainWindowController.MainFrameController.yspacingSpinBoxChanged"><code class="name flex">
+<span>def <span class="ident">yspacingSpinBoxChanged</span></span>(<span>self, event)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Changes the y spacing slider value to match the y spacing combo box value</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def yspacingSpinBoxChanged(self, event):
+    &#34;&#34;&#34;
+    Changes the y spacing slider value to match the y spacing combo box value
+    &#34;&#34;&#34;
+    self.yspacing = self.yspacingSpinBox.GetValue()
+    self.yspacingSlider.SetValue(self.yspacing)
+    self.updateFailedArray()</code></pre>
+</details>
+</dd>
+<dt id="MainWindowController.MainFrameController.ywindowChanged"><code class="name flex">
+<span>def <span class="ident">ywindowChanged</span></span>(<span>self, event)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Changes the shading on the y dimension</p>
+<h2 id="options">Options</h2>
+<ul>
+<li>Square (Default)</li>
+<li>Chebyshev</li>
+<li>Taylor</li>
+<li>Hamming</li>
+<li>Hanning</li>
+</ul></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def ywindowChanged(self, event):
+    &#34;&#34;&#34;
+    Changes the shading on the y dimension
+
+    Options:
+        * Square (Default)
+        * Chebyshev
+        * Taylor
+        * Hamming
+        * Hanning
+    &#34;&#34;&#34;
+    self.yshading =  self.ywindowSelector.GetValue()</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+<dt id="MainWindowController.panelDialogController"><code class="flex name class">
+<span>class <span class="ident">panelDialogController</span></span>
+<span>(</span><span>*args, **kwds)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>A class which controls the panel dialog window GUI element</p>
+<p>Overloads the panelDialog class generated by wxGlade</p>
+<p>&hellip;</p>
+<h2 id="attributes">Attributes</h2>
+<dl>
+<dt><strong><code>grid_sizer_1</code></strong> :&ensp;<code>wxgridsizer</code></dt>
+<dd>Grid which dynamically scales to the size of the array
+Contains checkboxes which toggle pannels on and off</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class panelDialogController(mw.panelDialog):
+    &#34;&#34;&#34;
+    A class which controls the panel dialog window GUI element
+
+    Overloads the panelDialog class generated by wxGlade
+
+    ...
+
+    Attributes
+    ----------
+
+    grid_sizer_1 : wxgridsizer
+        Grid which dynamically scales to the size of the array
+        Contains checkboxes which toggle pannels on and off
+    &#34;&#34;&#34;
+
+    def okPressed(self, event):
+        &#34;&#34;&#34;
+        Closes the dialog and saves the selected working panels to the array
+        &#34;&#34;&#34;
+        counterx = 0
+        countery = 0
+        counter = 0
+
+        while countery &lt; app.window.ynumber:
+            while counterx &lt; app.window.xnumber:
+                if self.buttons[counter].GetValue():
+                    app.window.failedPanels[counterx][countery] = 1
+                if not self.buttons[counter].GetValue():
+                    app.window.failedPanels[counterx][countery] = 0
+
+                counter += 1
+                counterx +=1
+
+            counterx = 0
+            countery += 1
+
+        print(app.window.failedPanels)
+        print(&#34;OK&#34;)
+        self.Close()
+
+    def configureSize(self):
+        &#34;&#34;&#34;
+        Dynamically scales the dialog box to match the size of the array
+        &#34;&#34;&#34;
+
+        print(app.window.failedPanels)
+        self.grid_sizer_1.SetCols(app.window.xnumber)
+        self.grid_sizer_1.SetRows(app.window.ynumber)
+        self.grid_sizer_1.Clear()
+
+        self.buttons = {}
+        counterx = 0
+        countery = 0
+        counter = 0
+
+        while countery &lt; app.window.ynumber:
+            while counterx &lt; app.window.xnumber:
+                self.buttons[counter] = wx.CheckBox(self, wx.ID_ANY, &#34;&#34;)
+                if app.window.failedPanels[counterx][countery] == 0:
+                    self.buttons[counter].SetValue(False)
+                if app.window.failedPanels[counterx][countery] == 1:
+                    self.buttons[counter].SetValue(True)
+                self.grid_sizer_1.Add(self.buttons[counter])
+
+                counter += 1
+                counterx +=1
+
+            counterx = 0
+            countery += 1
+
+        self.Fit()</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>GUI.MainWindow.panelDialog</li>
+<li>wx._core.Dialog</li>
+<li>wx._core.TopLevelWindow</li>
+<li>wx._core.NonOwnedWindow</li>
+<li>wx._core.Window</li>
+<li>wx._core.WindowBase</li>
+<li>wx._core.EvtHandler</li>
+<li>wx._core.Object</li>
+<li>wx._core.Trackable</li>
+<li>sip.wrapper</li>
+<li>sip.simplewrapper</li>
+</ul>
+<h3>Methods</h3>
+<dl>
+<dt id="MainWindowController.panelDialogController.configureSize"><code class="name flex">
+<span>def <span class="ident">configureSize</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Dynamically scales the dialog box to match the size of the array</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def configureSize(self):
+    &#34;&#34;&#34;
+    Dynamically scales the dialog box to match the size of the array
+    &#34;&#34;&#34;
+
+    print(app.window.failedPanels)
+    self.grid_sizer_1.SetCols(app.window.xnumber)
+    self.grid_sizer_1.SetRows(app.window.ynumber)
+    self.grid_sizer_1.Clear()
+
+    self.buttons = {}
+    counterx = 0
+    countery = 0
+    counter = 0
+
+    while countery &lt; app.window.ynumber:
+        while counterx &lt; app.window.xnumber:
+            self.buttons[counter] = wx.CheckBox(self, wx.ID_ANY, &#34;&#34;)
+            if app.window.failedPanels[counterx][countery] == 0:
+                self.buttons[counter].SetValue(False)
+            if app.window.failedPanels[counterx][countery] == 1:
+                self.buttons[counter].SetValue(True)
+            self.grid_sizer_1.Add(self.buttons[counter])
+
+            counter += 1
+            counterx +=1
+
+        counterx = 0
+        countery += 1
+
+    self.Fit()</code></pre>
+</details>
+</dd>
+<dt id="MainWindowController.panelDialogController.okPressed"><code class="name flex">
+<span>def <span class="ident">okPressed</span></span>(<span>self, event)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Closes the dialog and saves the selected working panels to the array</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def okPressed(self, event):
+    &#34;&#34;&#34;
+    Closes the dialog and saves the selected working panels to the array
+    &#34;&#34;&#34;
+    counterx = 0
+    countery = 0
+    counter = 0
+
+    while countery &lt; app.window.ynumber:
+        while counterx &lt; app.window.xnumber:
+            if self.buttons[counter].GetValue():
+                app.window.failedPanels[counterx][countery] = 1
+            if not self.buttons[counter].GetValue():
+                app.window.failedPanels[counterx][countery] = 0
+
+            counter += 1
+            counterx +=1
+
+        counterx = 0
+        countery += 1
+
+    print(app.window.failedPanels)
+    print(&#34;OK&#34;)
+    self.Close()</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+<dt id="MainWindowController.presetDialogController"><code class="flex name class">
+<span>class <span class="ident">presetDialogController</span></span>
+<span>(</span><span>*args, **kwds)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>A class which controls the preset dialog window GUI element</p>
+<p>Overloads the presetDialog class generated by wxGlade</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class presetDialogController(mw.presetDialog):
+    &#34;&#34;&#34;
+    A class which controls the preset dialog window GUI element
+
+    Overloads the presetDialog class generated by wxGlade
+    &#34;&#34;&#34;
+
+    def presetOKPressed(self, event):
+        &#34;&#34;&#34;
+        Save the current state with the filename specified in the box
+        &#34;&#34;&#34;
+        current_state = app.window.getState()
+        print(current_state)
+        f = open(&#34;current_state.json&#34;, &#34;w&#34;)
+        f.write(json.dumps(current_state))
+        f.close()
+        np.save(&#34;fails&#34;, app.window.failedPanels)
+
+        name = self.presetName.GetValue()
+
+        zipObj = ZipFile(name + &#34;.sham&#34;, &#34;w&#34;)
+        zipObj.write(&#34;current_state.json&#34;)
+        zipObj.write(&#34;fails.npy&#34;)
+        zipObj.close()
+
+        os.remove(&#34;current_state.json&#34;)
+        os.remove(&#34;fails.npy&#34;)
+
+        self.Close()</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>GUI.MainWindow.presetDialog</li>
+<li>wx._core.Dialog</li>
+<li>wx._core.TopLevelWindow</li>
+<li>wx._core.NonOwnedWindow</li>
+<li>wx._core.Window</li>
+<li>wx._core.WindowBase</li>
+<li>wx._core.EvtHandler</li>
+<li>wx._core.Object</li>
+<li>wx._core.Trackable</li>
+<li>sip.wrapper</li>
+<li>sip.simplewrapper</li>
+</ul>
+<h3>Methods</h3>
+<dl>
+<dt id="MainWindowController.presetDialogController.presetOKPressed"><code class="name flex">
+<span>def <span class="ident">presetOKPressed</span></span>(<span>self, event)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Save the current state with the filename specified in the box</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def presetOKPressed(self, event):
+    &#34;&#34;&#34;
+    Save the current state with the filename specified in the box
+    &#34;&#34;&#34;
+    current_state = app.window.getState()
+    print(current_state)
+    f = open(&#34;current_state.json&#34;, &#34;w&#34;)
+    f.write(json.dumps(current_state))
+    f.close()
+    np.save(&#34;fails&#34;, app.window.failedPanels)
+
+    name = self.presetName.GetValue()
+
+    zipObj = ZipFile(name + &#34;.sham&#34;, &#34;w&#34;)
+    zipObj.write(&#34;current_state.json&#34;)
+    zipObj.write(&#34;fails.npy&#34;)
+    zipObj.close()
+
+    os.remove(&#34;current_state.json&#34;)
+    os.remove(&#34;fails.npy&#34;)
+
+    self.Close()</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+<dt id="MainWindowController.windowApp"><code class="flex name class">
+<span>class <span class="ident">windowApp</span></span>
+<span>(</span><span>redirect=False, filename=None, useBestVisual=False, clearSigInt=True)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Overall app holding all the window and dialog objects</p>
+<p>Construct a <code>wx.App</code> object.</p>
+<p>:param redirect: Should <code>sys.stdout</code> and <code>sys.stderr</code> be
+redirected?
+Defaults to False. If <code>filename</code> is None
+then output will be redirected to a window that pops up
+as needed.
+(You can control what kind of window is created
+for the output by resetting the class variable
+<code>outputWindowClass</code> to a class of your choosing.)</p>
+<p>:param filename: The name of a file to redirect output to, if
+redirect is True.</p>
+<p>:param useBestVisual: Should the app try to use the best
+available visual provided by the system (only relevant on
+systems that have more than one visual.)
+This parameter
+must be used instead of calling <code>SetUseBestVisual</code> later
+on because it must be set before the underlying GUI
+toolkit is initialized.</p>
+<p>:param clearSigInt: Should SIGINT be cleared?
+This allows the
+app to terminate upon a Ctrl-C in the console like other
+GUI apps will.</p>
+<p>:note: You should override OnInit to do application
+initialization to ensure that the system, toolkit and
+wxWidgets are fully initialized.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class windowApp(wx.App):
+    &#34;&#34;&#34;
+    Overall app holding all the window and dialog objects
+    &#34;&#34;&#34;
+
+    def OnInit(self):
+        &#34;&#34;&#34;
+        Opens the Main Window on initialisation
+        &#34;&#34;&#34;
+        self.window = MainFrameController(None, wx.ID_ANY, &#34;&#34;)
+        self.window.Show()
+        return True
+
+    def panelDialog(self):
+        &#34;&#34;&#34;
+        Opens the Panel Dialog as a dialog box when the button is pressed in the Main Window
+        &#34;&#34;&#34;
+        self.dialog = panelDialogController(None, wx.ID_ANY, &#34;&#34;)
+        self.dialog.configureSize()
+        self.dialog.Show()
+
+    def presetDialog(self):
+        &#34;&#34;&#34;
+        Opens the Preset Dialog as a dialog box when the button is pressed in the Main Window
+        &#34;&#34;&#34;
+        self.dialog = presetDialogController(None, wx.ID_ANY, &#34;&#34;)
+        self.dialog.Show()</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>wx.core.App</li>
+<li>wx._core.PyApp</li>
+<li>wx._core.AppConsole</li>
+<li>wx._core.EvtHandler</li>
+<li>wx._core.Object</li>
+<li>wx._core.Trackable</li>
+<li>wx._core.EventFilter</li>
+<li>sip.wrapper</li>
+<li>sip.simplewrapper</li>
+</ul>
+<h3>Methods</h3>
+<dl>
+<dt id="MainWindowController.windowApp.OnInit"><code class="name flex">
+<span>def <span class="ident">OnInit</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Opens the Main Window on initialisation</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def OnInit(self):
+    &#34;&#34;&#34;
+    Opens the Main Window on initialisation
+    &#34;&#34;&#34;
+    self.window = MainFrameController(None, wx.ID_ANY, &#34;&#34;)
+    self.window.Show()
+    return True</code></pre>
+</details>
+</dd>
+<dt id="MainWindowController.windowApp.panelDialog"><code class="name flex">
+<span>def <span class="ident">panelDialog</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Opens the Panel Dialog as a dialog box when the button is pressed in the Main Window</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def panelDialog(self):
+    &#34;&#34;&#34;
+    Opens the Panel Dialog as a dialog box when the button is pressed in the Main Window
+    &#34;&#34;&#34;
+    self.dialog = panelDialogController(None, wx.ID_ANY, &#34;&#34;)
+    self.dialog.configureSize()
+    self.dialog.Show()</code></pre>
+</details>
+</dd>
+<dt id="MainWindowController.windowApp.presetDialog"><code class="name flex">
+<span>def <span class="ident">presetDialog</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Opens the Preset Dialog as a dialog box when the button is pressed in the Main Window</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def presetDialog(self):
+    &#34;&#34;&#34;
+    Opens the Preset Dialog as a dialog box when the button is pressed in the Main Window
+    &#34;&#34;&#34;
+    self.dialog = presetDialogController(None, wx.ID_ANY, &#34;&#34;)
+    self.dialog.Show()</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="MainWindowController.MainFrameController" href="#MainWindowController.MainFrameController">MainFrameController</a></code></h4>
+<ul class="">
+<li><code><a title="MainWindowController.MainFrameController.aziSliderChanged" href="#MainWindowController.MainFrameController.aziSliderChanged">aziSliderChanged</a></code></li>
+<li><code><a title="MainWindowController.MainFrameController.aziSpinBoxChanged" href="#MainWindowController.MainFrameController.aziSpinBoxChanged">aziSpinBoxChanged</a></code></li>
+<li><code><a title="MainWindowController.MainFrameController.eleSliderChanged" href="#MainWindowController.MainFrameController.eleSliderChanged">eleSliderChanged</a></code></li>
+<li><code><a title="MainWindowController.MainFrameController.eleSpinBoxChanged" href="#MainWindowController.MainFrameController.eleSpinBoxChanged">eleSpinBoxChanged</a></code></li>
+<li><code><a title="MainWindowController.MainFrameController.getDimensions" href="#MainWindowController.MainFrameController.getDimensions">getDimensions</a></code></li>
+<li><code><a title="MainWindowController.MainFrameController.getState" href="#MainWindowController.MainFrameController.getState">getState</a></code></li>
+<li><code><a title="MainWindowController.MainFrameController.graphComboSelect" href="#MainWindowController.MainFrameController.graphComboSelect">graphComboSelect</a></code></li>
+<li><code><a title="MainWindowController.MainFrameController.panelButtonPressed" href="#MainWindowController.MainFrameController.panelButtonPressed">panelButtonPressed</a></code></li>
+<li><code><a title="MainWindowController.MainFrameController.polar2d" href="#MainWindowController.MainFrameController.polar2d">polar2d</a></code></li>
+<li><code><a title="MainWindowController.MainFrameController.presetLoad" href="#MainWindowController.MainFrameController.presetLoad">presetLoad</a></code></li>
+<li><code><a title="MainWindowController.MainFrameController.presetSave" href="#MainWindowController.MainFrameController.presetSave">presetSave</a></code></li>
+<li><code><a title="MainWindowController.MainFrameController.quitPressed" href="#MainWindowController.MainFrameController.quitPressed">quitPressed</a></code></li>
+<li><code><a title="MainWindowController.MainFrameController.showGraph" href="#MainWindowController.MainFrameController.showGraph">showGraph</a></code></li>
+<li><code><a title="MainWindowController.MainFrameController.surface3d" href="#MainWindowController.MainFrameController.surface3d">surface3d</a></code></li>
+<li><code><a title="MainWindowController.MainFrameController.updateFailedArray" href="#MainWindowController.MainFrameController.updateFailedArray">updateFailedArray</a></code></li>
+<li><code><a title="MainWindowController.MainFrameController.xnumberSliderChanged" href="#MainWindowController.MainFrameController.xnumberSliderChanged">xnumberSliderChanged</a></code></li>
+<li><code><a title="MainWindowController.MainFrameController.xnumberSpinBoxChanged" href="#MainWindowController.MainFrameController.xnumberSpinBoxChanged">xnumberSpinBoxChanged</a></code></li>
+<li><code><a title="MainWindowController.MainFrameController.xspacingSliderChanged" href="#MainWindowController.MainFrameController.xspacingSliderChanged">xspacingSliderChanged</a></code></li>
+<li><code><a title="MainWindowController.MainFrameController.xspacingSpinBoxChanged" href="#MainWindowController.MainFrameController.xspacingSpinBoxChanged">xspacingSpinBoxChanged</a></code></li>
+<li><code><a title="MainWindowController.MainFrameController.xwindowChanged" href="#MainWindowController.MainFrameController.xwindowChanged">xwindowChanged</a></code></li>
+<li><code><a title="MainWindowController.MainFrameController.ynumberSliderChanged" href="#MainWindowController.MainFrameController.ynumberSliderChanged">ynumberSliderChanged</a></code></li>
+<li><code><a title="MainWindowController.MainFrameController.ynumberSpinBoxChanged" href="#MainWindowController.MainFrameController.ynumberSpinBoxChanged">ynumberSpinBoxChanged</a></code></li>
+<li><code><a title="MainWindowController.MainFrameController.yspacingSliderChanged" href="#MainWindowController.MainFrameController.yspacingSliderChanged">yspacingSliderChanged</a></code></li>
+<li><code><a title="MainWindowController.MainFrameController.yspacingSpinBoxChanged" href="#MainWindowController.MainFrameController.yspacingSpinBoxChanged">yspacingSpinBoxChanged</a></code></li>
+<li><code><a title="MainWindowController.MainFrameController.ywindowChanged" href="#MainWindowController.MainFrameController.ywindowChanged">ywindowChanged</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="MainWindowController.panelDialogController" href="#MainWindowController.panelDialogController">panelDialogController</a></code></h4>
+<ul class="">
+<li><code><a title="MainWindowController.panelDialogController.configureSize" href="#MainWindowController.panelDialogController.configureSize">configureSize</a></code></li>
+<li><code><a title="MainWindowController.panelDialogController.okPressed" href="#MainWindowController.panelDialogController.okPressed">okPressed</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="MainWindowController.presetDialogController" href="#MainWindowController.presetDialogController">presetDialogController</a></code></h4>
+<ul class="">
+<li><code><a title="MainWindowController.presetDialogController.presetOKPressed" href="#MainWindowController.presetDialogController.presetOKPressed">presetOKPressed</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="MainWindowController.windowApp" href="#MainWindowController.windowApp">windowApp</a></code></h4>
+<ul class="">
+<li><code><a title="MainWindowController.windowApp.OnInit" href="#MainWindowController.windowApp.OnInit">OnInit</a></code></li>
+<li><code><a title="MainWindowController.windowApp.panelDialog" href="#MainWindowController.windowApp.panelDialog">panelDialog</a></code></li>
+<li><code><a title="MainWindowController.windowApp.presetDialog" href="#MainWindowController.windowApp.presetDialog">presetDialog</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.9.1</a>.</p>
+</footer>
+</body>
+</html>
