@@ -113,6 +113,11 @@ class MainFrameController(mw.mainFrame):
         self.graphMode = "3D Surface"
         self.xshading = "Square"
         self.yshading = "Square"
+        self.sos = 1500
+        self.frequency = 500
+        self.temperature = 18
+        self.salinity = 100
+        self.depth = 20
 
         self.updateFailedArray()
 
@@ -204,7 +209,16 @@ class MainFrameController(mw.mainFrame):
         """
         Commands the program to display the graph selected
         """
-        array = antarray.RectArray(self.xnumber, self.ynumber, self.xspacing/2, self.yspacing/2)
+
+        wavelength = self.sos / self.frequency
+        print(wavelength)
+
+        xfraction = self.xspacing / (wavelength*100)
+        yfraction = self.yspacing / (wavelength*100)
+
+        print(xfraction, yfraction)
+
+        array = antarray.RectArray(self.xnumber, self.ynumber, xfraction, yfraction)
         #theta = np.arange(-180, 180, 0.1)
 
         array.toggle_panels(self.failedPanels)
@@ -366,6 +380,9 @@ class MainFrameController(mw.mainFrame):
             * 2D Polar
         """
         self.graphMode = self.graphCombo.GetValue()
+
+    def wilsonPressed(self, event):
+        app.wilsonDialog()
 
     def presetSave(self, event):
         """
@@ -533,6 +550,61 @@ class presetDialogController(mw.presetDialog):
 
         self.Close()
 
+class wilsonDialogController(mw.wilsonDialog):
+
+    def wilsonEquation(self, update = False):
+
+        temperature = self.tempctrl.GetValue()
+        salinity = self.salinctrl.GetValue()
+        depth = self.depthctrl.GetValue()
+
+        sos = 1449 + 4.6*temperature - 0.055*(temperature**2) + 1.39*(salinity - 35) + 0.017*depth
+
+        self.sos.SetLabel(str(sos))
+
+        if update:
+            app.window.sos = sos
+
+    def setValues(self):
+
+        self.sos.SetLabel(str(app.window.sos))
+        self.freqctrl.SetValue(app.window.frequency)
+        self.tempctrl.SetValue(app.window.temperature)
+        self.salinctrl.SetValue(app.window.salinity)
+        self.depthctrl.SetValue(app.window.depth)
+
+    def tempchanged(self, event):
+        self.wilsonEquation()
+
+    def temptyped(self, event):  # wxGlade: wilsonDialog.<event_handler>
+        print("Event handler 'temptyped' not implemented!")
+        event.Skip()
+
+    def salinchanged(self, event):  # wxGlade: wilsonDialog.<event_handler>
+        self.wilsonEquation()
+
+    def salintyped(self, event):  # wxGlade: wilsonDialog.<event_handler>
+        print("Event handler 'salintyped' not implemented!")
+        event.Skip()
+
+    def depthchanged(self, event):  # wxGlade: wilsonDialog.<event_handler>
+        self.wilsonEquation()
+        event.Skip()
+
+    def depthtyped(self, event):  # wxGlade: wilsonDialog.<event_handler>
+        print("Event handler 'depthtyped' not implemented!")
+        event.Skip()
+
+    def okPressed(self, event):  # wxGlade: wilsonDialog.<event_handler>
+        self.wilsonEquation(True)
+
+        app.window.frequency = self.freqctrl.GetValue()
+        app.window.temperature = self.tempctrl.GetValue()
+        app.window.salinity = self.salinctrl.GetValue()
+        app.window.depth = self.depthctrl.GetValue()
+
+        self.Close()
+
 class windowApp(wx.App):
     """
     Overall app holding all the window and dialog objects
@@ -559,6 +631,11 @@ class windowApp(wx.App):
         Opens the Preset Dialog as a dialog box when the button is pressed in the Main Window
         """
         self.dialog = presetDialogController(None, wx.ID_ANY, "")
+        self.dialog.Show()
+
+    def wilsonDialog(self):
+        self.dialog = wilsonDialogController(None, wx.ID_ANY, "")
+        self.dialog.setValues()
         self.dialog.Show()
 
 if __name__ == "__main__":
