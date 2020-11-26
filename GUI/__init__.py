@@ -1,1 +1,1 @@
-from .MainWindow import mainFrame, panelDialog, presetDialog
+from .MainWindow import mainFrame, panelDialog, presetDialog, wilsonDialog
