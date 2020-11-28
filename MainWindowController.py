@@ -121,7 +121,11 @@ class MainFrameController(mw.mainFrame):
 
         self.updateFailedArray()
 
-        os.chdir("Presets/")
+        if not os.path.isdir("Presets/"):
+            os.mkdir("Presets/")
+
+        if os.path.isdir("Presets/"):
+            os.chdir("Presets/")
 
         super().__init__(*args, **kwds)
         wxglade_tmp_menu = wx.Menu()
