@@ -1,6 +1,7 @@
 __pycache__
 *.wxg~
 *.py~
+*.sham
 
 GUI/MainWindow.py
-Presets/
+!Defaults.sham
