@@ -1,23 +1,22 @@
-"""
-    This file contains the class for the Main Window Controller
-    Overloading the empty methods for the GUI elements
-"""
+from ..GUI_Output import mainWindow
+from zipfile import ZipFile
 
-
-import GUI as mw
-import numpy as np
 import matplotlib.pyplot as pyplt
 import matplotlib.transforms as mtransforms
 from mpl_toolkits import mplot3d
 from matplotlib import cm
-import json
-import glob, os
-from zipfile import ZipFile
+
 import antarray
+import numpy as np
+import json
+import os
 import math
 import wx
+import sys
+import glob
 
-class MainFrameController(mw.mainFrame):
+
+class MainWindowController(mainWindow):
     """
     A class which controls the main window GUI element
     and the array shape
@@ -60,7 +59,7 @@ class MainFrameController(mw.mainFrame):
     """
 
 
-    def __init__(self, *args, **kwds):
+    def __init__(self, app, *args, **kwds):
         """
         Parameters
         ----------
@@ -102,24 +101,7 @@ class MainFrameController(mw.mainFrame):
             Default 3D Surface
         """
 
-
-        self.arraytype = "rect"
-        self.xnumber = 1
-        self.xspacing = 1
-        self.ynumber = 1
-        self.yspacing = 1
-        self.azi = 0
-        self.ele = 0
-        self.graphMode = "3D Surface"
-        self.xshading = "Square"
-        self.yshading = "Square"
-        self.sos = 1500
-        self.frequency = 500
-        self.temperature = 18
-        self.salinity = 100
-        self.depth = 20
-
-        self.updateFailedArray()
+        self.app = app
 
         if not os.path.isdir("Presets/"):
             os.mkdir("Presets/")
@@ -128,10 +110,24 @@ class MainFrameController(mw.mainFrame):
             os.chdir("Presets/")
 
         super().__init__(*args, **kwds)
+
+        if self.loadState("Defaults"):
+            self.hardcodeDefault()
+            self.loadPresetsMenu(True)
+            self.updateFailedArray()
+            return
+
+        self.updateFailedArray()
+
+        self.loadPresetsMenu()
+
+    def loadPresetsMenu(self, reload = False):
         wxglade_tmp_menu = wx.Menu()
         number = 0
         self.preset = {}
         for file in glob.glob("*.sham"):
+            if file[:-5] == "Defaults":
+                continue
             wxglade_tmp_menu.Append(number, file[:-5])
             self.preset[number] = file
             self.Bind(wx.EVT_MENU, self.presetLoad, id=number)
@@ -139,19 +135,22 @@ class MainFrameController(mw.mainFrame):
 
         self.frame_menubar.Insert(3, wxglade_tmp_menu, "Presets")
 
+        if reload:
+            print("New Menu")
+            self.frame_menubar.Remove(4)
 
     def quitPressed(self, event):
         """
         Exits the program
         """
         print("quitting")
-        exit()
+        sys.exit()
 
     def panelButtonPressed(self, event):
         """
         Opens failed panels Dialog
         """
-        app.panelDialog()
+        self.app.panelDialog()
 
     def surface3d(self, pattern, xgrid, ygrid):
         """
@@ -253,9 +252,34 @@ class MainFrameController(mw.mainFrame):
                             "elevation" : self.ele,
                             "graphmode" : self.graphMode,
                             "xshading" : self.xshading,
-                            "yshading" : self.yshading}
+                            "yshading" : self.yshading,
+                            "sos" : self.sos,
+                            "frequency" : self.frequency,
+                            "temperature" : self.temperature,
+                            "salinity" : self.salinity,
+                            "depth" : self.depth}
 
         return current_state
+
+    def saveState(self, name):
+        current_state = self.getState()
+        print(current_state)
+        f = open("current_state.json", "w")
+        f.write(json.dumps(current_state))
+        f.close()
+        np.save("fails", self.failedPanels)
+
+
+        zipObj = ZipFile(name + ".sham", "w")
+        zipObj.write("current_state.json")
+        zipObj.write("fails.npy")
+        zipObj.close()
+
+        os.remove("current_state.json")
+        os.remove("fails.npy")
+
+        self.loadPresetsMenu(True)
+
 
     def xnumberSliderChanged(self, event):
         """
@@ -386,22 +410,27 @@ class MainFrameController(mw.mainFrame):
         self.graphMode = self.graphCombo.GetValue()
 
     def wilsonPressed(self, event):
-        app.wilsonDialog()
+        self.app.wilsonDialog()
 
     def presetSave(self, event):
         """
         Save the current state of the program to be recalled later
         """
         print("Saving Config")
-        app.presetDialog()
+        self.app.presetDialog()
 
-    def presetLoad(self, event):
-        """
-        Load a prior used state of the program to be used
+    def resetDefault(self, event):
+        self.loadState("Defaults")
 
-        FIle Type required '.sham'
-        """
-        with ZipFile(self.preset[event.GetId()]) as myzip:
+    def saveDefault(self, event):
+        self.saveState("Defaults")
+
+    def loadState(self, name):
+
+        if not os.path.isfile(name + ".sham"):
+            return True
+
+        with ZipFile(name + ".sham") as myzip:
             myzip.extract("current_state.json")
             myzip.extract("fails.npy")
 
@@ -417,6 +446,11 @@ class MainFrameController(mw.mainFrame):
         self.graphMode = data["graphmode"]
         self.xshading = data["xshading"]
         self.yshading = data["yshading"]
+        self.sos = data["sos"]
+        self.frequency = data["frequency"]
+        self.temperature = data["temperature"]
+        self.salinity = data["salinity"]
+        self.depth = data["depth"]
 
         self.failedPanels = np.load("fails.npy")
 
@@ -439,6 +473,38 @@ class MainFrameController(mw.mainFrame):
         self.xwindowSelector.SetValue(self.xshading)
         self.ywindowSelector.SetValue(self.yshading)
 
+
+    def hardcodeDefault(self):
+        self.arraytype = "rect"
+        self.xnumber = 2
+        self.xspacing = 150
+        self.ynumber = 2
+        self.yspacing = 150
+        self.azi = 0
+        self.ele = 0
+        self.graphMode = "3D Surface"
+        self.xshading = "Square"
+        self.yshading = "Square"
+        self.sos = 1500
+        self.frequency = 500
+        self.temperature = 18
+        self.salinity = 100
+        self.depth = 20
+
+        self.updateFailedArray()
+
+
+        self.saveState("Defaults")
+    def presetLoad(self, event):
+        """
+        Load a prior used state of the program to be used
+
+        FIle Type required '.sham'
+        """
+
+        name = self.preset.GetId()
+        self.loadState(name)
+
     def updateFailedArray(self):
         """
         Updates the array for panel failures on closure of the panel failed dialog
@@ -450,198 +516,3 @@ class MainFrameController(mw.mainFrame):
         Gets the current array dimensions
         """
         return (self.xnumber, self.ynumber)
-
-class panelDialogController(mw.panelDialog):
-    """
-    A class which controls the panel dialog window GUI element
-
-    Overloads the panelDialog class generated by wxGlade
-
-    ...
-
-    Attributes
-    ----------
-
-    grid_sizer_1 : wxgridsizer
-        Grid which dynamically scales to the size of the array
-        Contains checkboxes which toggle pannels on and off
-    """
-
-    def okPressed(self, event):
-        """
-        Closes the dialog and saves the selected working panels to the array
-        """
-        counterx = 0
-        countery = 0
-        counter = 0
-
-        while countery < app.window.ynumber:
-            while counterx < app.window.xnumber:
-                if self.buttons[counter].GetValue():
-                    app.window.failedPanels[counterx][countery] = 1
-                if not self.buttons[counter].GetValue():
-                    app.window.failedPanels[counterx][countery] = 0
-
-                counter += 1
-                counterx +=1
-
-            counterx = 0
-            countery += 1
-
-        print(app.window.failedPanels)
-        print("OK")
-        self.Close()
-
-    def configureSize(self):
-        """
-        Dynamically scales the dialog box to match the size of the array
-        """
-
-        print(app.window.failedPanels)
-        self.grid_sizer_1.SetCols(app.window.xnumber)
-        self.grid_sizer_1.SetRows(app.window.ynumber)
-        self.grid_sizer_1.Clear()
-
-        self.buttons = {}
-        counterx = 0
-        countery = 0
-        counter = 0
-
-        while countery < app.window.ynumber:
-            while counterx < app.window.xnumber:
-                self.buttons[counter] = wx.CheckBox(self, wx.ID_ANY, "")
-                if app.window.failedPanels[counterx][countery] == 0:
-                    self.buttons[counter].SetValue(False)
-                if app.window.failedPanels[counterx][countery] == 1:
-                    self.buttons[counter].SetValue(True)
-                self.grid_sizer_1.Add(self.buttons[counter])
-
-                counter += 1
-                counterx +=1
-
-            counterx = 0
-            countery += 1
-
-        self.Fit()
-
-class presetDialogController(mw.presetDialog):
-    """
-    A class which controls the preset dialog window GUI element
-
-    Overloads the presetDialog class generated by wxGlade
-    """
-
-    def presetOKPressed(self, event):
-        """
-        Save the current state with the filename specified in the box
-        """
-        current_state = app.window.getState()
-        print(current_state)
-        f = open("current_state.json", "w")
-        f.write(json.dumps(current_state))
-        f.close()
-        np.save("fails", app.window.failedPanels)
-
-        name = self.presetName.GetValue()
-
-        zipObj = ZipFile(name + ".sham", "w")
-        zipObj.write("current_state.json")
-        zipObj.write("fails.npy")
-        zipObj.close()
-
-        os.remove("current_state.json")
-        os.remove("fails.npy")
-
-        self.Close()
-
-class wilsonDialogController(mw.wilsonDialog):
-
-    def wilsonEquation(self, update = False):
-
-        temperature = self.tempctrl.GetValue()
-        salinity = self.salinctrl.GetValue()
-        depth = self.depthctrl.GetValue()
-
-        sos = 1449 + 4.6*temperature - 0.055*(temperature**2) + 1.39*(salinity - 35) + 0.017*depth
-
-        self.sos.SetLabel(str(sos))
-
-        if update:
-            app.window.sos = sos
-
-    def setValues(self):
-
-        self.sos.SetLabel(str(app.window.sos))
-        self.freqctrl.SetValue(app.window.frequency)
-        self.tempctrl.SetValue(app.window.temperature)
-        self.salinctrl.SetValue(app.window.salinity)
-        self.depthctrl.SetValue(app.window.depth)
-
-    def tempchanged(self, event):
-        self.wilsonEquation()
-
-    def temptyped(self, event):  # wxGlade: wilsonDialog.<event_handler>
-        print("Event handler 'temptyped' not implemented!")
-        event.Skip()
-
-    def salinchanged(self, event):  # wxGlade: wilsonDialog.<event_handler>
-        self.wilsonEquation()
-
-    def salintyped(self, event):  # wxGlade: wilsonDialog.<event_handler>
-        print("Event handler 'salintyped' not implemented!")
-        event.Skip()
-
-    def depthchanged(self, event):  # wxGlade: wilsonDialog.<event_handler>
-        self.wilsonEquation()
-        event.Skip()
-
-    def depthtyped(self, event):  # wxGlade: wilsonDialog.<event_handler>
-        print("Event handler 'depthtyped' not implemented!")
-        event.Skip()
-
-    def okPressed(self, event):  # wxGlade: wilsonDialog.<event_handler>
-        self.wilsonEquation(True)
-
-        app.window.frequency = self.freqctrl.GetValue()
-        app.window.temperature = self.tempctrl.GetValue()
-        app.window.salinity = self.salinctrl.GetValue()
-        app.window.depth = self.depthctrl.GetValue()
-
-        self.Close()
-
-class windowApp(wx.App):
-    """
-    Overall app holding all the window and dialog objects
-    """
-
-    def OnInit(self):
-        """
-        Opens the Main Window on initialisation
-        """
-        self.window = MainFrameController(None, wx.ID_ANY, "")
-        self.window.Show()
-        return True
-
-    def panelDialog(self):
-        """
-        Opens the Panel Dialog as a dialog box when the button is pressed in the Main Window
-        """
-        self.dialog = panelDialogController(None, wx.ID_ANY, "")
-        self.dialog.configureSize()
-        self.dialog.Show()
-
-    def presetDialog(self):
-        """
-        Opens the Preset Dialog as a dialog box when the button is pressed in the Main Window
-        """
-        self.dialog = presetDialogController(None, wx.ID_ANY, "")
-        self.dialog.Show()
-
-    def wilsonDialog(self):
-        self.dialog = wilsonDialogController(None, wx.ID_ANY, "")
-        self.dialog.setValues()
-        self.dialog.Show()
-
-if __name__ == "__main__":
-    app = windowApp(0)
-    app.MainLoop()
