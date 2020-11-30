@@ -129,7 +129,7 @@ class MainWindowController(mainWindow):
             if file[:-5] == "Defaults":
                 continue
             wxglade_tmp_menu.Append(number, file[:-5])
-            self.preset[number] = file
+            self.preset[number] = file[:-5]
             self.Bind(wx.EVT_MENU, self.presetLoad, id=number)
             number += 1
 
@@ -428,6 +428,7 @@ class MainWindowController(mainWindow):
     def loadState(self, name):
 
         if not os.path.isfile(name + ".sham"):
+            print("Out")
             return True
 
         with ZipFile(name + ".sham") as myzip:
@@ -502,7 +503,7 @@ class MainWindowController(mainWindow):
         FIle Type required '.sham'
         """
 
-        name = self.preset.GetId()
+        name = self.preset[event.GetId()]
         self.loadState(name)
 
     def updateFailedArray(self):
