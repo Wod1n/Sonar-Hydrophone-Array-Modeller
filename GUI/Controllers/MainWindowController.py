@@ -15,7 +15,6 @@ import wx
 import sys
 import glob
 
-
 class MainWindowController(mainWindow):
     """
     A class which controls the main window GUI element
@@ -118,6 +117,12 @@ class MainWindowController(mainWindow):
             return
 
         self.updateFailedArray()
+
+        if not os.path.isdir("Presets/"):
+            os.mkdir("Presets/")
+
+        if os.path.isdir("Presets/"):
+            os.chdir("Presets/")
 
         self.loadPresetsMenu()
 
@@ -428,7 +433,6 @@ class MainWindowController(mainWindow):
     def loadState(self, name):
 
         if not os.path.isfile(name + ".sham"):
-            print("Out")
             return True
 
         with ZipFile(name + ".sham") as myzip:
